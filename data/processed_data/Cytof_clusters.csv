@@ -1,0 +1,293 @@
+	Donor	labels_Cytof
+0	Covid HH008	C 6 - Elderly group 
+1	Covid HH021	"C 3 - CMV seropositive
+senescent "
+2	Covid HH023	C 6 - Elderly group 
+3	Covid HH031	C 4 - FAS cluster 
+4	Covid HH032	C 6 - Elderly group 
+5	Covid HH044	C 5 - Naïve group 
+6	Covid HH073	C 6 - Elderly group 
+7	Covid HH076	C 4 - FAS cluster 
+8	Covid HH078.1	"C 3 - CMV seropositive
+senescent "
+9	Covid HH078.2	"C 3 - CMV seropositive
+senescent "
+10	Covid HH081	"C 3 - CMV seropositive
+senescent "
+11	Covid HH094	C 5 - Naïve group 
+12	Covid HH101	C 6 - Elderly group 
+13	Covid HH116	C 6 - Elderly group 
+14	Covid HH135	"C 3 - CMV seropositive
+senescent "
+15	Covid PT001	"C 3 - CMV seropositive
+senescent "
+16	Covid PT003	"C 3 - CMV seropositive
+senescent "
+17	Covid PT013	"C 3 - CMV seropositive
+senescent "
+18	Covid PT014	C 6 - Elderly group 
+19	Covid PT017	C 6 - Elderly group 
+20	Covid PT018	C 6 - Elderly group 
+21	Covid PT019	C 5 - Naïve group 
+22	Covid PT020	C 4 - FAS cluster 
+23	Covid PT022	C 4 - FAS cluster 
+24	Covid PT023	"C 3 - CMV seropositive
+senescent "
+25	Covid PT025	"C 3 - CMV seropositive
+senescent "
+26	Covid PT028	"C 3 - CMV seropositive
+senescent "
+27	Covid PT030	C 6 - Elderly group 
+28	Covid PT033	C 6 - Elderly group 
+29	Covid PT039	C 4 - FAS cluster 
+30	Covid PT042	C 6 - Elderly group 
+31	Covid PT044	C 6 - Elderly group 
+32	Covid PT046	C 6 - Elderly group 
+33	Covid PT047	C 4 - FAS cluster 
+34	Covid PT050	C 6 - Elderly group 
+35	Covid PT054	C 6 - Elderly group 
+36	Covid PT057	C 6 - Elderly group 
+37	Covid PT059	"C 3 - CMV seropositive
+senescent "
+38	Covid PT068	C 6 - Elderly group 
+39	Covid PT071	"C 3 - CMV seropositive
+senescent "
+40	Covid PT072	C 6 - Elderly group 
+41	Covid PT074	C 6 - Elderly group 
+42	Covid PT075	C 4 - FAS cluster 
+43	Covid PT077	C 5 - Naïve group 
+44	Covid PT079	C 4 - FAS cluster 
+45	Covid PT080	"C 3 - CMV seropositive
+senescent "
+46	Covid PT081	C 6 - Elderly group 
+47	Covid PT082	C 5 - Naïve group 
+48	Covid PT086	C 4 - FAS cluster 
+49	Covid PT087	C 1 - LAG3 cluster 
+50	Covid PT088	C 5 - Naïve group 
+51	Covid PT093	C 5 - Naïve group 
+52	Covid PT099	C 4 - FAS cluster 
+53	Covid PT101	"C 3 - CMV seropositive
+senescent "
+54	Covid PT103	C 4 - FAS cluster 
+55	Covid PT111	C 5 - Naïve group 
+56	Covid PT112	C 1 - LAG3 cluster 
+57	Covid PT115	C 6 - Elderly group 
+58	Covid PT116	C 4 - FAS cluster 
+59	Covid PT118	C 4 - FAS cluster 
+60	Covid PT121	C 5 - Naïve group 
+61	Covid PT123	"C 3 - CMV seropositive
+senescent "
+62	Covid PT129	C 6 - Elderly group 
+63	Covid PT130	C 4 - FAS cluster 
+64	Covid PT135	C 4 - FAS cluster 
+65	Covid PT136	"C 3 - CMV seropositive
+senescent "
+66	Covid PT140	C 6 - Elderly group 
+67	Covid PT141	C 6 - Elderly group 
+68	Covid PT142	"C 3 - CMV seropositive
+senescent "
+69	Covid PT143	"C 3 - CMV seropositive
+senescent "
+70	Covid PT145	C 6 - Elderly group 
+71	Covid PT148	C 4 - FAS cluster 
+72	Covid PT154	"C 3 - CMV seropositive
+senescent "
+73	Covid PT159	C 4 - FAS cluster 
+74	Covid PT164	C 4 - FAS cluster 
+75	Covid PT166	C 4 - FAS cluster 
+76	Covid PT168	C 6 - Elderly group 
+77	Covid PT174	"C 3 - CMV seropositive
+senescent "
+78	Covid PT181	C 6 - Elderly group 
+79	Covid PT183	C 5 - Naïve group 
+80	ERC CO003	C 6 - Elderly group 
+81	ERC CO005	C 6 - Elderly group 
+82	ERC CO008	"C 3 - CMV seropositive
+senescent "
+83	ERC CO009	C 6 - Elderly group 
+84	ERC CO010	"C 3 - CMV seropositive
+senescent "
+85	ERC CO017	"C 3 - CMV seropositive
+senescent "
+86	ERC CO018	C 5 - Naïve group 
+87	ERC CO020	C 5 - Naïve group 
+88	ERC CO021	C 5 - Naïve group 
+89	ERC CO022	C 6 - Elderly group 
+90	ERC CO023	C 6 - Elderly group 
+91	ERC CO024	"C 3 - CMV seropositive
+senescent "
+92	ERC CO025	C 4 - FAS cluster 
+93	ERC CO026	C 5 - Naïve group 
+94	ERC CO027	C 5 - Naïve group 
+95	ERC CO028	C 5 - Naïve group 
+96	ERC CO037	C 6 - Elderly group 
+97	ERC CO039	C 5 - Naïve group 
+98	ERC CO041	"C 3 - CMV seropositive
+senescent "
+99	ERC CO042	C 1 - LAG3 cluster 
+100	ERC CO044	"C 3 - CMV seropositive
+senescent "
+101	ERC CO046	"C 3 - CMV seropositive
+senescent "
+102	ERC CO048	C 4 - FAS cluster 
+103	ERC CO050	"C 3 - CMV seropositive
+senescent "
+104	ERC CO052	"C 3 - CMV seropositive
+senescent "
+105	ERC CO053	"C 3 - CMV seropositive
+senescent "
+106	ERC CO054	C 6 - Elderly group 
+107	ERC CO055	"C 3 - CMV seropositive
+senescent "
+108	ERC CO059	"C 3 - CMV seropositive
+senescent "
+109	ERC CO060	C 4 - FAS cluster 
+110	ERC CO061	"C 3 - CMV seropositive
+senescent "
+111	ERC CO062	C 6 - Elderly group 
+112	ERC CO063	"C 3 - CMV seropositive
+senescent "
+113	ERC CO067	C 5 - Naïve group 
+114	ERC CO068	C 4 - FAS cluster 
+115	ERC CO070	C 4 - FAS cluster 
+116	ERC CO071	C 4 - FAS cluster 
+117	ERC CO072	C 6 - Elderly group 
+118	ERC CO073	C 6 - Elderly group 
+119	ERC CO074	"C 3 - CMV seropositive
+senescent "
+120	ERC CO075	C 5 - Naïve group 
+121	ERC CO077	"C 3 - CMV seropositive
+senescent "
+122	ERC CO078	"C 3 - CMV seropositive
+senescent "
+123	ERC CO080	C 5 - Naïve group 
+124	ERC CO081	C 4 - FAS cluster 
+125	ERC CO084	"C 3 - CMV seropositive
+senescent "
+126	ERC CO085	C 4 - FAS cluster 
+127	ERC CO086	C 5 - Naïve group 
+128	ERC CO087	C 6 - Elderly group 
+129	ERC CO088	C 6 - Elderly group 
+130	ERC CO089	C 6 - Elderly group 
+131	ERC CO090	"C 3 - CMV seropositive
+senescent "
+132	ERC CO091	C 4 - FAS cluster 
+133	ERC CO093	C 5 - Naïve group 
+134	ERC CO096	C 6 - Elderly group 
+135	ERC CO097	C 4 - FAS cluster 
+136	ERC CO099	C 5 - Naïve group 
+137	ERC CO100	C 6 - Elderly group 
+138	ERC CO101	"C 3 - CMV seropositive
+senescent "
+139	ERC CO103	C 5 - Naïve group 
+140	ERC CO104	C 6 - Elderly group 
+141	ERC CO105	"C 3 - CMV seropositive
+senescent "
+142	ERC CO109	C 5 - Naïve group 
+143	ERC CO111	C 5 - Naïve group 
+144	ERC CO112	C 5 - Naïve group 
+145	ERC CO114	"C 3 - CMV seropositive
+senescent "
+146	ERC CO115	C 6 - Elderly group 
+147	ERC CO116	"C 3 - CMV seropositive
+senescent "
+148	ERC CO117	C 5 - Naïve group 
+149	ERC CO118	C 4 - FAS cluster 
+150	ERC CO120	C 5 - Naïve group 
+151	ERC CO121	C 4 - FAS cluster 
+152	ERC CO122	C 5 - Naïve group 
+153	ERC CO124	C 4 - FAS cluster 
+154	ERC CO125	C 5 - Naïve group 
+155	ERC CO127	C 5 - Naïve group 
+156	ERC CO129	C 6 - Elderly group 
+157	ERC CO130	C 5 - Naïve group 
+158	ERC CO131	"C 3 - CMV seropositive
+senescent "
+159	ERC CO133	C 5 - Naïve group 
+160	ERC CO134	C 6 - Elderly group 
+161	ERC CO135	C 4 - FAS cluster 
+162	ERC CO136	C 6 - Elderly group 
+163	ERC CO138	C 5 - Naïve group 
+164	ERC CO139	"C 3 - CMV seropositive
+senescent "
+165	ERC CO140	C 4 - FAS cluster 
+166	ERC CO141	C 4 - FAS cluster 
+167	ERC CO143	C 6 - Elderly group 
+168	ERC CO146	C 6 - Elderly group 
+169	ERC CO148	C 5 - Naïve group 
+170	ERC CO150	C 5 - Naïve group 
+171	ERC CO151	C 5 - Naïve group 
+172	ERC CO152	C 6 - Elderly group 
+173	ERC CO153	C 5 - Naïve group 
+174	ERC CO155	C 5 - Naïve group 
+175	ERC CO156	C 4 - FAS cluster 
+176	ERC CO160	C 5 - Naïve group 
+177	ERC CO164	C 6 - Elderly group 
+178	ERC CO165	C 6 - Elderly group 
+179	ERC CO166	C 5 - Naïve group 
+180	ERC CO167	C 5 - Naïve group 
+181	ERC CO170	C 4 - FAS cluster 
+182	ERC CO171	C 6 - Elderly group 
+183	ERC CO173	C 5 - Naïve group 
+184	ERC CO175	C 4 - FAS cluster 
+185	ERC CO176	C 5 - Naïve group 
+186	ERC CO177	C 5 - Naïve group 
+187	ERC CO178	C 4 - FAS cluster 
+188	ERC CO179	"C 3 - CMV seropositive
+senescent "
+189	ERC CO180	C 5 - Naïve group 
+190	ERC CO182	"C 3 - CMV seropositive
+senescent "
+191	ERC CO183	C 5 - Naïve group 
+192	ERC CO184	C 5 - Naïve group 
+193	ERC CO185	C 6 - Elderly group 
+194	ERC CO191	C 5 - Naïve group 
+195	ERC CO192	C 2 - Monocyte-driven 
+196	ERC CO193	"C 3 - CMV seropositive
+senescent "
+197	ERC CO196	C 6 - Elderly group 
+198	ERC CO197	"C 3 - CMV seropositive
+senescent "
+199	ERC CO199	C 5 - Naïve group 
+200	ERC CO201	"C 3 - CMV seropositive
+senescent "
+201	ERC CO211	C 5 - Naïve group 
+202	ERC CO212	C 2 - Monocyte-driven 
+203	ERC CO214	C 6 - Elderly group 
+204	ERC CO215	C 6 - Elderly group 
+205	ERC CO216	"C 3 - CMV seropositive
+senescent "
+206	ERC CO218	C 4 - FAS cluster 
+207	ERC CO220	C 6 - Elderly group 
+208	ERC CO222	C 4 - FAS cluster 
+209	ERC CO223	C 5 - Naïve group 
+210	ERC CO224	C 6 - Elderly group 
+211	ERC CO225	C 6 - Elderly group 
+212	ERC CO226	C 2 - Monocyte-driven 
+213	ERC CO227	C 5 - Naïve group 
+214	ERC CO228	C 6 - Elderly group 
+215	ERC CO231	C 1 - LAG3 cluster 
+216	ERC CO233	"C 3 - CMV seropositive
+senescent "
+217	ERC CO234	C 5 - Naïve group 
+218	ERC CO236	"C 3 - CMV seropositive
+senescent "
+219	ERC CO242	C 2 - Monocyte-driven 
+220	ERC CO248	C 2 - Monocyte-driven 
+221	ERC CO249	C 5 - Naïve group 
+222	ERC CO252	C 2 - Monocyte-driven 
+223	ERC CO253	C 2 - Monocyte-driven 
+224	ERC CO255	C 4 - FAS cluster 
+225	ERC CO256	C 2 - Monocyte-driven 
+226	ERC CO257	C 6 - Elderly group 
+227	ERC CO259	"C 3 - CMV seropositive
+senescent "
+228	ERC CO260	C 2 - Monocyte-driven 
+229	ERC CO261	C 6 - Elderly group 
+230	ERC CO262	C 5 - Naïve group 
+231	ERC CO263	C 2 - Monocyte-driven 
+232	ERC CO266	"C 3 - CMV seropositive
+senescent "
+233	ERC CO267	C 4 - FAS cluster 
+234	ERC CO268	C 2 - Monocyte-driven 
+235	ERC CO269	C 4 - FAS cluster 

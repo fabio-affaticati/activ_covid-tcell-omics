@@ -1,0 +1,315 @@
+,Donor,labels
+0,Covid HH031,Lachnospiraceae-driven
+1,Covid HH032,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+2,Covid HH039,Lachnospiraceae-driven
+3,Covid HH053,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+4,Covid HH078,Lachnospiraceae-driven
+5,Covid HH080,Bacteroidaceae driven
+6,Covid HH081,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+7,Covid HH135,Lachnospiraceae-driven
+8,Covid HH136,Lachnospiraceae-driven
+9,Covid PT001,"Prevotella-driven
+High BMI"
+10,Covid PT002,Lachnospiraceae-driven
+11,Covid PT003,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+12,Covid PT004,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+13,Covid PT006,Lachnospiraceae-driven
+14,Covid PT015,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+15,Covid PT020,Bacteroidaceae driven
+16,Covid PT025,Bacteroidaceae driven
+17,Covid PT026,Bacteroidaceae driven
+18,Covid PT030,Bacteroidaceae driven
+19,Covid PT031,Bacteroidaceae driven
+20,Covid PT032,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+21,Covid PT036,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+22,Covid PT037,Lachnospiraceae-driven
+23,Covid PT039,Lachnospiraceae-driven
+24,Covid PT040,Bacteroidaceae driven
+25,Covid PT041,Bacteroidaceae driven
+26,Covid PT043,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+27,Covid PT044,Lachnospiraceae-driven
+28,Covid PT046,Lachnospiraceae-driven
+29,Covid PT047,Bacteroidaceae driven
+30,Covid PT050,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+31,Covid PT051,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+32,Covid PT053,Bacteroidaceae driven
+33,Covid PT054,Bacteroidaceae driven
+34,Covid PT055,Bacteroidaceae driven
+35,Covid PT057,Lachnospiraceae-driven
+36,Covid PT058,Lachnospiraceae-driven
+37,Covid PT060,"Prevotella-driven
+High BMI"
+38,Covid PT061,Lachnospiraceae-driven
+39,Covid PT062,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+40,Covid PT068,"Prevotella-driven
+High BMI"
+41,Covid PT071,Lachnospiraceae-driven
+42,Covid PT072,"Prevotella-driven
+High BMI"
+43,Covid PT073,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+44,Covid PT075,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+45,Covid PT079,Bacteroidaceae driven
+46,Covid PT083,"Prevotella-driven
+High BMI"
+47,Covid PT084,Lachnospiraceae-driven
+48,Covid PT088,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+49,Covid PT091,Bacteroidaceae driven
+50,Covid PT097,"Prevotella-driven
+High BMI"
+51,Covid PT098,Bacteroidaceae driven
+52,Covid PT102,Lachnospiraceae-driven
+53,Covid PT103,"Prevotella-driven
+High BMI"
+54,Covid PT104,Bacteroidaceae driven
+55,Covid PT112,Bacteroidaceae driven
+56,Covid PT113,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+57,Covid PT114,Lachnospiraceae-driven
+58,Covid PT115,Lachnospiraceae-driven
+59,Covid PT117,"Prevotella-driven
+High BMI"
+60,Covid PT118,Bacteroidaceae driven
+61,Covid PT119,Bacteroidaceae driven
+62,Covid PT124,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+63,Covid PT125,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+64,Covid PT131,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+65,Covid PT132,Lachnospiraceae-driven
+66,Covid PT135,"Prevotella-driven
+High BMI"
+67,Covid PT136,Bacteroidaceae driven
+68,Covid PT137,Lachnospiraceae-driven
+69,Covid PT139,Bacteroidaceae driven
+70,Covid PT140,Lachnospiraceae-driven
+71,Covid PT143,Lachnospiraceae-driven
+72,Covid PT144,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+73,Covid PT145,Bacteroidaceae driven
+74,Covid PT147,Bacteroidaceae driven
+75,Covid PT148,"Prevotella-driven
+High BMI"
+76,Covid PT164,Bacteroidaceae driven
+77,ERC CO003,Lachnospiraceae-driven
+78,ERC CO008,Lachnospiraceae-driven
+79,ERC CO009,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+80,ERC CO010,Lachnospiraceae-driven
+81,ERC CO011,Lachnospiraceae-driven
+82,ERC CO0112,Lachnospiraceae-driven
+83,ERC CO012,Bacteroidaceae driven
+84,ERC CO014,"Prevotella-driven
+High BMI"
+85,ERC CO015,"Prevotella-driven
+High BMI"
+86,ERC CO017,Lachnospiraceae-driven
+87,ERC CO018,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+88,ERC CO020,"Prevotella-driven
+High BMI"
+89,ERC CO021,Lachnospiraceae-driven
+90,ERC CO022,Bacteroidaceae driven
+91,ERC CO025,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+92,ERC CO029,Bacteroidaceae driven
+93,ERC CO030,Lachnospiraceae-driven
+94,ERC CO031,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+95,ERC CO036,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+96,ERC CO037,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+97,ERC CO038,Bacteroidaceae driven
+98,ERC CO039,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+99,ERC CO040,Lachnospiraceae-driven
+100,ERC CO042,Lachnospiraceae-driven
+101,ERC CO044,Lachnospiraceae-driven
+102,ERC CO049,Lachnospiraceae-driven
+103,ERC CO050,Lachnospiraceae-driven
+104,ERC CO057,Lachnospiraceae-driven
+105,ERC CO060,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+106,ERC CO061,Bacteroidaceae driven
+107,ERC CO062,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+108,ERC CO063,Lachnospiraceae-driven
+109,ERC CO066,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+110,ERC CO068,Bacteroidaceae driven
+111,ERC CO069,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+112,ERC CO071,Bacteroidaceae driven
+113,ERC CO072,"Prevotella-driven
+High BMI"
+114,ERC CO073,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+115,ERC CO076,Lachnospiraceae-driven
+116,ERC CO077,Bacteroidaceae driven
+117,ERC CO079,Bacteroidaceae driven
+118,ERC CO080,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+119,ERC CO081,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+120,ERC CO082,Lachnospiraceae-driven
+121,ERC CO083,Bacteroidaceae driven
+122,ERC CO086,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+123,ERC CO087,"Prevotella-driven
+High BMI"
+124,ERC CO088,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+125,ERC CO089,Bacteroidaceae driven
+126,ERC CO090,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+127,ERC CO096,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+128,ERC CO097,Lachnospiraceae-driven
+129,ERC CO100,Lachnospiraceae-driven
+130,ERC CO101,Bacteroidaceae driven
+131,ERC CO103,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+132,ERC CO104,Bacteroidaceae driven
+133,ERC CO105,Bacteroidaceae driven
+134,ERC CO110,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+135,ERC CO111,Lachnospiraceae-driven
+136,ERC CO114,Lachnospiraceae-driven
+137,ERC CO115,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+138,ERC CO123,Bacteroidaceae driven
+139,ERC CO128,"Prevotella-driven
+High BMI"
+140,ERC CO130,Lachnospiraceae-driven
+141,ERC CO134,Bacteroidaceae driven
+142,ERC CO135,Bacteroidaceae driven
+143,ERC CO139,Lachnospiraceae-driven
+144,ERC CO142,"Prevotella-driven
+High BMI"
+145,ERC CO144,Bacteroidaceae driven
+146,ERC CO145,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+147,ERC CO148,Lachnospiraceae-driven
+148,ERC CO149,Lachnospiraceae-driven
+149,ERC CO150,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+150,ERC CO156,"Prevotella-driven
+High BMI"
+151,ERC CO160,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+152,ERC CO161,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+153,ERC CO168,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+154,ERC CO170,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+155,ERC CO171,Lachnospiraceae-driven
+156,ERC CO172,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+157,ERC CO174,Lachnospiraceae-driven
+158,ERC CO179,Lachnospiraceae-driven
+159,ERC CO182,"Prevotella-driven
+High BMI"
+160,ERC CO185,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+161,ERC CO193,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+162,ERC CO211,Lachnospiraceae-driven
+163,ERC CO212,"Prevotella-driven
+High BMI"
+164,ERC CO215,Lachnospiraceae-driven
+165,ERC CO217,Bacteroidaceae driven
+166,ERC CO220,Lachnospiraceae-driven
+167,ERC CO221,Lachnospiraceae-driven
+168,ERC CO223,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+169,ERC CO224,Lachnospiraceae-driven
+170,ERC CO225,Lachnospiraceae-driven
+171,ERC CO226,Bacteroidaceae driven
+172,ERC CO228,Bacteroidaceae driven
+173,ERC CO230,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+174,ERC CO246,Lachnospiraceae-driven
+175,ERC CO247,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+176,ERC CO250,Lachnospiraceae-driven
+177,ERC CO255,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+178,ERC CO263,Lachnospiraceae-driven
+179,ERC CO265,Lachnospiraceae-driven
+180,ERC CO266,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"
+181,ERC CO267,"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"

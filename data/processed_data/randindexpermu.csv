@@ -1,0 +1,201 @@
+	Donor	to	from
+0	Covid HH031	Lachnospiraceae-driven	C 4 - FAS cluster 
+1	Covid HH032	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 
+2	Covid HH081	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	"C 3 - CMV seropositive
+senescent "
+3	Covid HH135	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+4	Covid PT001	"Prevotella-driven
+High BMI"	"C 3 - CMV seropositive
+senescent "
+5	Covid PT003	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	"C 3 - CMV seropositive
+senescent "
+6	Covid PT020	Bacteroidaceae driven	C 4 - FAS cluster 
+7	Covid PT025	Bacteroidaceae driven	"C 3 - CMV seropositive
+senescent "
+8	Covid PT030	Bacteroidaceae driven	C 6 - Elderly group 
+9	Covid PT039	Lachnospiraceae-driven	C 4 - FAS cluster 
+10	Covid PT044	Lachnospiraceae-driven	C 6 - Elderly group 
+11	Covid PT046	Lachnospiraceae-driven	C 6 - Elderly group 
+12	Covid PT047	Bacteroidaceae driven	C 4 - FAS cluster 
+13	Covid PT050	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 
+14	Covid PT054	Bacteroidaceae driven	C 6 - Elderly group 
+15	Covid PT057	Lachnospiraceae-driven	C 6 - Elderly group 
+16	Covid PT068	"Prevotella-driven
+High BMI"	C 6 - Elderly group 
+17	Covid PT071	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+18	Covid PT072	"Prevotella-driven
+High BMI"	C 6 - Elderly group 
+19	Covid PT075	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 4 - FAS cluster 
+20	Covid PT079	Bacteroidaceae driven	C 4 - FAS cluster 
+21	Covid PT088	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 5 - Naïve group 
+22	Covid PT103	"Prevotella-driven
+High BMI"	C 4 - FAS cluster 
+23	Covid PT112	Bacteroidaceae driven	C 1 - LAG3 cluster 
+24	Covid PT115	Lachnospiraceae-driven	C 6 - Elderly group 
+25	Covid PT118	Bacteroidaceae driven	C 4 - FAS cluster 
+26	Covid PT135	"Prevotella-driven
+High BMI"	C 4 - FAS cluster 
+27	Covid PT136	Bacteroidaceae driven	"C 3 - CMV seropositive
+senescent "
+28	Covid PT140	Lachnospiraceae-driven	C 6 - Elderly group 
+29	Covid PT143	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+30	Covid PT145	Bacteroidaceae driven	C 6 - Elderly group 
+31	Covid PT148	"Prevotella-driven
+High BMI"	C 4 - FAS cluster 
+32	Covid PT164	Bacteroidaceae driven	C 4 - FAS cluster 
+33	ERC CO003	Lachnospiraceae-driven	C 6 - Elderly group 
+34	ERC CO008	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+35	ERC CO009	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 
+36	ERC CO010	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+37	ERC CO017	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+38	ERC CO018	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 5 - Naïve group 
+39	ERC CO020	"Prevotella-driven
+High BMI"	C 5 - Naïve group 
+40	ERC CO021	Lachnospiraceae-driven	C 5 - Naïve group 
+41	ERC CO022	Bacteroidaceae driven	C 6 - Elderly group 
+42	ERC CO025	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 4 - FAS cluster 
+43	ERC CO037	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 
+44	ERC CO039	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 5 - Naïve group 
+45	ERC CO042	Lachnospiraceae-driven	C 1 - LAG3 cluster 
+46	ERC CO044	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+47	ERC CO050	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+48	ERC CO060	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 4 - FAS cluster 
+49	ERC CO061	Bacteroidaceae driven	"C 3 - CMV seropositive
+senescent "
+50	ERC CO062	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 
+51	ERC CO063	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+52	ERC CO068	Bacteroidaceae driven	C 4 - FAS cluster 
+53	ERC CO071	Bacteroidaceae driven	C 4 - FAS cluster 
+54	ERC CO072	"Prevotella-driven
+High BMI"	C 6 - Elderly group 
+55	ERC CO073	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 
+56	ERC CO077	Bacteroidaceae driven	"C 3 - CMV seropositive
+senescent "
+57	ERC CO080	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 5 - Naïve group 
+58	ERC CO081	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 4 - FAS cluster 
+59	ERC CO086	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 5 - Naïve group 
+60	ERC CO087	"Prevotella-driven
+High BMI"	C 6 - Elderly group 
+61	ERC CO088	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 
+62	ERC CO089	Bacteroidaceae driven	C 6 - Elderly group 
+63	ERC CO090	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	"C 3 - CMV seropositive
+senescent "
+64	ERC CO096	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 
+65	ERC CO097	Lachnospiraceae-driven	C 4 - FAS cluster 
+66	ERC CO100	Lachnospiraceae-driven	C 6 - Elderly group 
+67	ERC CO101	Bacteroidaceae driven	"C 3 - CMV seropositive
+senescent "
+68	ERC CO103	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 5 - Naïve group 
+69	ERC CO104	Bacteroidaceae driven	C 6 - Elderly group 
+70	ERC CO105	Bacteroidaceae driven	"C 3 - CMV seropositive
+senescent "
+71	ERC CO111	Lachnospiraceae-driven	C 5 - Naïve group 
+72	ERC CO114	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+73	ERC CO115	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 
+74	ERC CO130	Lachnospiraceae-driven	C 5 - Naïve group 
+75	ERC CO134	Bacteroidaceae driven	C 6 - Elderly group 
+76	ERC CO135	Bacteroidaceae driven	C 4 - FAS cluster 
+77	ERC CO139	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+78	ERC CO148	Lachnospiraceae-driven	C 5 - Naïve group 
+79	ERC CO150	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 5 - Naïve group 
+80	ERC CO156	"Prevotella-driven
+High BMI"	C 4 - FAS cluster 
+81	ERC CO160	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 5 - Naïve group 
+82	ERC CO170	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 4 - FAS cluster 
+83	ERC CO171	Lachnospiraceae-driven	C 6 - Elderly group 
+84	ERC CO179	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "
+85	ERC CO182	"Prevotella-driven
+High BMI"	"C 3 - CMV seropositive
+senescent "
+86	ERC CO185	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 
+87	ERC CO193	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	"C 3 - CMV seropositive
+senescent "
+88	ERC CO211	Lachnospiraceae-driven	C 5 - Naïve group 
+89	ERC CO212	"Prevotella-driven
+High BMI"	C 2 - Monocyte-driven 
+90	ERC CO215	Lachnospiraceae-driven	C 6 - Elderly group 
+91	ERC CO220	Lachnospiraceae-driven	C 6 - Elderly group 
+92	ERC CO223	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 5 - Naïve group 
+93	ERC CO224	Lachnospiraceae-driven	C 6 - Elderly group 
+94	ERC CO225	Lachnospiraceae-driven	C 6 - Elderly group 
+95	ERC CO226	Bacteroidaceae driven	C 2 - Monocyte-driven 
+96	ERC CO228	Bacteroidaceae driven	C 6 - Elderly group 
+97	ERC CO255	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 4 - FAS cluster 
+98	ERC CO263	Lachnospiraceae-driven	C 2 - Monocyte-driven 
+99	ERC CO266	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	"C 3 - CMV seropositive
+senescent "
+100	ERC CO267	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 4 - FAS cluster 

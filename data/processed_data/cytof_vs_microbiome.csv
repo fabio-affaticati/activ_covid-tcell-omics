@@ -1,0 +1,38 @@
+	to	from	value
+0	Bacteroidaceae driven	C 1 - LAG3 cluster 	1
+1	Bacteroidaceae driven	C 2 - Monocyte-driven 	1
+2	Bacteroidaceae driven	"C 3 - CMV seropositive
+senescent "	6
+3	Bacteroidaceae driven	C 4 - FAS cluster 	8
+4	Bacteroidaceae driven	C 6 - Elderly group 	8
+5	Lachnospiraceae-driven	C 1 - LAG3 cluster 	1
+6	Lachnospiraceae-driven	C 2 - Monocyte-driven 	1
+7	Lachnospiraceae-driven	"C 3 - CMV seropositive
+senescent "	12
+8	Lachnospiraceae-driven	C 4 - FAS cluster 	3
+9	Lachnospiraceae-driven	C 5 - Naïve group 	5
+10	Lachnospiraceae-driven	C 6 - Elderly group 	12
+11	"Prevotella-driven
+High BMI"	C 2 - Monocyte-driven 	1
+12	"Prevotella-driven
+High BMI"	"C 3 - CMV seropositive
+senescent "	2
+13	"Prevotella-driven
+High BMI"	C 4 - FAS cluster 	4
+14	"Prevotella-driven
+High BMI"	C 5 - Naïve group 	1
+15	"Prevotella-driven
+High BMI"	C 6 - Elderly group 	4
+16	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	"C 3 - CMV seropositive
+senescent "	5
+17	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 4 - FAS cluster 	7
+18	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 5 - Naïve group 	9
+19	"Ruminococcaceae &
+Christensenellaceae
+driven Low BMI"	C 6 - Elderly group 	10
