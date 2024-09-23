@@ -131,7 +131,6 @@ cython_debug/
 # Directories
 data/processed_data/
 data/microbiome_analysis/
-data/CyTOF/
 data/TCR_seq/
 manuscript/
 results/
