@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 import glob
 import os
+import re
+
+from src.modules.tcrdata import TcrData
 
 
 def metadata_import(meta_dir):
@@ -110,6 +113,51 @@ def tcr_stats_import(tcr_stats_dir):
     return TCR_stats
 
 
+
+def tcrseq_loading(tcr_dir):
+    
+    folders = [f for f in os.listdir(tcr_dir) if "run" in f]
+    tcr_raw = []
+    
+    for run in folders:
+
+        samplefiles = [f for f in os.listdir(tcr_dir+"/"+run) if "_clones.txt" in f]
+
+        re_pat = re.compile(r'^(\d+)\w_(\w+)_(CD\d)_\w+\.txt')
+        parsed_samplefiles = [ (m.group(1),m.group(2),m.group(3),m.group(0)) for m in (re_pat.search(file) for file in samplefiles) if m ]
+
+        condensedsamples = dict()
+        for i in parsed_samplefiles:
+            condensedsamples.setdefault(i[0],[]).append([i[1],i[2],i[3]])
+
+        for sample in condensedsamples:
+
+            for filedata in condensedsamples[sample]:
+                
+                file = filedata[2]
+                description = filedata[0]
+                type = filedata[1]
+
+                readdata = TcrData()
+                readdata.read_mixcr(tcr_dir+"/" + run +"/" + file, minFreq = 5)
+                readdata.raw['sample'] = description
+                tcr_raw.append(readdata.raw)
+    
+    tcr_raw = pd.concat(tcr_raw, ignore_index=True)          
+    tcr_raw['freq']/=6
+    tcr_raw = tcr_raw.groupby(['tcrseq', 'sample'], as_index=False).agg({'count': 'sum', 'freq': 'sum', 'cdr3': 'first', 'vgene':'first', 'jgene': 'first'})
+    tcr_raw['sample'] = tcr_raw['sample'].str.replace('_', ' ')
+    replacements_subjectnr = {'HH HA':'HHHA', '78 1':'78.1', '78 2': '78.2', 'Covid HH0801':'Covid HHHA031'}
+    tcr_raw['sample'].replace(replacements_subjectnr, regex=True, inplace=True)
+    tcr_raw = tcr_raw.query(f'sample != "Covid HH053"')
+    tcr_raw = tcr_raw.query('vgene.str.startswith("TRB")')
+    tcr_raw['vgene'] += "*01"
+    tcr_raw['jgene'] += "*01"
+    tcr_raw.reset_index(drop=True,inplace=True)
+    
+    return tcr_raw
+
+
 def import_all_cytof(cytof_dir):
 
     """
@@ -157,16 +205,8 @@ def import_all_cytof(cytof_dir):
     cytof['Donor'] = [('ERC ' + donor) if donor.startswith('CO') else ('Covid '+ donor) for donor in cytof['Donor']]
     cytof['Donor'].replace(replacements, regex=True, inplace=True)
 
-    # Translate metacluster tags into cell subpopulations
-    #cytof.rename(columns={
-    #                'Metacluster 1': 'CD3+CD4-CD8+CD45RA-CCR7+',
-    #                'Metacluster 2': 'CD3+CD4-CD8+CD45RA-CCR7-',
-    #                'Metacluster 3': 'CD3-CD19+CCR6+',
-    #                'Metacluster 4': 'CD3-CD56+',
-    #                'Metacluster 5': 'CD3-CD11c+CD14+',
-    #                'Metacluster 6': 'CD3+CD4+CD45RA-CCR7+',
-    #                'Metacluster 7': 'CD3+CD4+CD45RA-CCR7-'},
-    #                  inplace = True)
+
+    # Renomae the metaclusters with the corresponding cell types
     cytof.rename(columns={
                    'Metacluster 1': 'Sen_CD8+Temra',
                    'Metacluster 2': 'Sen_CD4+Tem',
@@ -196,7 +236,6 @@ def import_all_cytof(cytof_dir):
 
     cytof_meta.drop(columns={'Group'}, inplace=True)
     return pd.merge(cytof, cytof_meta, on ='Donor', how='inner').dropna(how='any')
-
 
 
 
@@ -241,10 +280,7 @@ def microbiome_import(micro_path, percent, flag = 'relative'):
   
     micro_taxa['genus'] = micro_taxa['genus'].fillna(micro_taxa['taxon_name'].str.split(' ').str[0])
 
-
-
     abundances = micro_abundances.pivot(index = 'sample_id', columns = 'taxon_id', values=flag)
-
 
     abundances.columns = [col for col in abundances.columns]
     abundances.reset_index(inplace=True)
@@ -255,7 +291,6 @@ def microbiome_import(micro_path, percent, flag = 'relative'):
     micro_fused['description'] = micro_fused['description'].str.replace('COVHH-','Covid HH')
     micro_fused['description'] = micro_fused['description'].str.replace('ERCCO-','ERC CO')
     micro_fused['description'] = micro_fused['description'].str.replace('COVPT-','Covid PT')
-
 
     micro_fused.drop_duplicates(subset=['description'], keep='first', inplace=True)
     micro_fused.drop(columns=['sample', 'participant','location','timepoint','plate','lib_size', 'dna_pcr_reads', 'pool', 'dna_pcr_qubit', 'run','sample_id','control','project','condition', 'passes_qc'],inplace=True)
@@ -321,7 +356,7 @@ def cleanup_rna(rna):
     transcript counts with DESeq2 normalisation implementation.
     """
     
-    # prepare name of columns
+# prepare name of columns
     rna.drop(rna.columns[rna.columns.str.startswith('Unnamed')], axis = 1, inplace=True)
     rna.columns = [col.split('/tmp_files/')[-1] for col in rna.columns]
     rna.columns = rna.columns.str.rstrip('.sam')

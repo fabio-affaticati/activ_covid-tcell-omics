@@ -7,9 +7,25 @@ library(ggplot2)
 library(ggvenn)
 library(reshape2)
 
-workingDir = "/Users/fabioaffaticati/Desktop/Work/activ_covid-and-omics"
+workingDir = "/Users/fabioaffaticati/Desktop/Work/old/activ_covid-and-omics_legacy"
 setwd(workingDir)
 
+###############
+png("chord_diagram_RNAstability.png", width = 5, height = 5, units = "in", res = 600)
+chord = read.csv('RNA_chord.csv', sep = '\t', row.names = 1)
+circos.par(start.degree = 90)
+chordDiagram(chord, big.gap = 30,
+             order = c("Unstable", "Stable C 5", "Stable C 4", "Stable C 3",
+                       "Stable C 2", "Stable C 1", "C 1",
+                       "C 2", "C 3", "C 4", "C 5"),
+)
+dev.off()
+circos.clear()
+###############
+
+
+
+###############
 RNAclusters <- read.csv('RNA_clusters.csv', sep = '\t', row.names = 1)
 Microclusters <- read.csv('Micro_clusters.csv', sep = '\t', row.names = 1)
 Cytofclusters <- read.csv('Cytof_clusters.csv', sep = '\t', row.names = 1)
@@ -23,38 +39,33 @@ merged_df[is.na(merged_df)] <- 0
 # cytof vs rna
 counts <- as.data.frame(table(merged_df$labels_RNA, merged_df$labels_Cytof))
 names(counts) <- c("to", "from", "value")
-counts$to <- paste("RNA", counts$to, sep = " ")
-counts$from <- paste("Cytof", counts$from, sep = " ")
-circos.par(start.degree = 90)
-chordDiagram(counts, big.gap = 20, small.gap = 7,
-             order = c("RNA C 4", "RNA C 3", "RNA C 2",
-                       "RNA C 1", "RNA C 0", "Cytof C 0", "Cytof C 1",
-                       "Cytof C 2", "Cytof C 3", "Cytof C 4", "Cytof C 5")
-)
+counts <- counts %>%
+  filter_all(all_vars(. != "0"))
 
-png("CytofRNA_circle_plot.png")
+png("CytofRNA_chord_diagram.png", width = 7, height = 7, units = "in", res = 600)
+circos.par(start.degree = 90)
+chordDiagram(counts, big.gap = 30, small.gap = 12,
+             order = unique(c(sort(counts$to, decreasing = TRUE), sort(counts$from))))
 dev.off()
+circos.clear()
 
 # microbiome vs rna
 counts <- as.data.frame(table(merged_df$labels_RNA, merged_df$labels_Micro))
 names(counts) <- c("to", "from", "value")
-counts$to <- paste("RNA", counts$to, sep = " ")
-counts$from <- paste("Micro", counts$from, sep = " ")
+counts <- counts %>%
+  filter_all(all_vars(. != "0"))
+png("MicroRNA_chord_diagram.png", width = 7, height = 7, units = "in", res = 600)
 circos.par(start.degree = 90)
-chordDiagram(counts, big.gap = 20, small.gap = 7,
-             order = c("RNA C 4", "RNA C 3", "RNA C 2",
-                       "RNA C 1", "RNA C 0", "Micro C 0", "Micro C 1",
-                       "Micro C 2", "Micro C 3")
-)
-
-png("MicroRNA_circle_plot.png")
+chordDiagram(counts, big.gap = 30, small.gap = 5,
+             order = unique(c(sort(counts$to, decreasing = TRUE), sort(counts$from))))
 dev.off()
+circos.clear()
+###############
 
 
 
 
-
-
+###############
 merged_df[merged_df != 0] <- 1
 names(merged_df) <- c("Donor", "RNAseq", "Microbiome", "CyTOF", "TCRseq")
 merged_df[, 2:ncol(merged_df)] <- lapply(merged_df[, 2:ncol(merged_df)] , as.numeric)
@@ -77,6 +88,7 @@ venn_plot <- ggvenn(venn_data, fill_color = c("orange", "darkgreen", "lightblue"
        stroke_size = 0.5, set_name_size = 4)
 # Save the plot
 ggsave("results/vennplot.png", scale = 1, plot = venn_plot, width = 8, height = 6)
+###############
 
 
 
@@ -224,35 +236,6 @@ bar_plot
 
 
 
-
-
-
-
-
-chord = read.csv('cytof_chord.csv', sep = '\t', row.names = 1)
-
-chordDiagram(chord, big.gap = 20, annotationTrack = "grid", preAllocateTracks = 1,
-             order = c("Unstable", "Stable C 5", "Stable C 4", "Stable C 3",
-                       "Stable C 2", "Stable C 1", "Stable C 0",
-                       "C 0", "C 1", "C 2", "C 3", "C 4", "C 5")
-)
-circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
-  xlim = get.cell.meta.data("xlim")
-  ylim = get.cell.meta.data("ylim")
-  sector.name = get.cell.meta.data("sector.index")
-  circos.text(mean(xlim), ylim[1] + .1, sector.name, facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5))
-  circos.axis(h = "top", labels.cex = 0.5, major.tick.percentage = 0.2, sector.index = sector.name, track.index = 2)
-}, bg.border = NA)
-
-
-
-chord = read.csv('RNA_chord.csv', sep = '\t', row.names = 1)
-circos.par(start.degree = 90)
-chordDiagram(chord, big.gap = 30,
-            order = c("Unstable", "Stable C 4", "Stable C 3", "Stable C 2",
-                       "Stable C 1", "Stable C 0", "C 0",
-                       "C 1", "C 2", "C 3", "C 4")
-             )
 
 
 

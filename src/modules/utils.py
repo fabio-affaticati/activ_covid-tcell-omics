@@ -19,61 +19,37 @@ from statsmodels.tools.tools import add_constant
 import statistics
 from snf import make_affinity
 
-from src.modules.tcrdata import TcrData
-
 import warnings
 
 
 from src.modules.py_deseq import py_DESeq2
-from src.modules.plotting import significant_reg, convert_pvalue_to_asterisks, features_ami
+from src.modules.plotting import significant_reg, convert_pvalue_to_asterisks
 
 
 
 random_state = 42
 
 
-def tcrseq_loading(tcr_dir):
+def eigentaxa_encoding(micro_fused_rel, eigentaxa):
     
-    folders = [f for f in os.listdir(tcr_dir) if "run" in f]
-    tcr_raw = []
+    pca = PCA(n_components=1)
+    scaler = StandardScaler()
     
-    for run in folders:
+    dim_red_bacteria = micro_fused_rel.drop(columns = ['Donor']).T.copy()
+    dim_red_bacteria.columns = micro_fused_rel['Donor']
+    dim_red_bacteria['taxaname'] = dim_red_bacteria.index
+    dim_red_bacteria = dim_red_bacteria.replace({"taxaname": dict(zip(eigentaxa['microbe'], eigentaxa['eigentaxa']))})
 
-        samplefiles = [f for f in os.listdir(tcr_dir+"/"+run) if "_clones.txt" in f]
+    dim_red_bacteria.reset_index(drop=True,inplace=True)
+    agg = dim_red_bacteria.groupby('taxaname', as_index = False)
 
-        re_pat = re.compile(r'^(\d+)\w_(\w+)_(CD\d)_\w+\.txt')
-        parsed_samplefiles = [ (m.group(1),m.group(2),m.group(3),m.group(0)) for m in (re_pat.search(file) for file in samplefiles) if m ]
+    pose = pd.DataFrame()
 
-        condensedsamples = dict()
-        for i in parsed_samplefiles:
-            condensedsamples.setdefault(i[0],[]).append([i[1],i[2],i[3]])
+    for group_name, df_group in agg:
+        df_group = pca.fit_transform(scaler.fit_transform(df_group.drop(columns='taxaname').to_numpy().T)).T
+        pose[group_name] = df_group.flatten().tolist()
 
-        for sample in condensedsamples:
-
-            for filedata in condensedsamples[sample]:
-                
-                file = filedata[2]
-                description = filedata[0]
-                type = filedata[1]
-
-                readdata = TcrData()
-                readdata.read_mixcr(tcr_dir+"/" + run +"/" + file, minFreq = 5)
-                readdata.raw['sample'] = description
-                tcr_raw.append(readdata.raw)
-    
-    tcr_raw = pd.concat(tcr_raw, ignore_index=True)          
-    tcr_raw['freq']/=6
-    tcr_raw = tcr_raw.groupby(['tcrseq', 'sample'], as_index=False).agg({'count': 'sum', 'freq': 'sum', 'cdr3': 'first', 'vgene':'first', 'jgene': 'first'})
-    tcr_raw['sample'] = tcr_raw['sample'].str.replace('_', ' ')
-    replacements_subjectnr = {'HH HA':'HHHA', '78 1':'78.1', '78 2': '78.2', 'Covid HH0801':'Covid HHHA031'}
-    tcr_raw['sample'].replace(replacements_subjectnr, regex=True, inplace=True)
-    tcr_raw = tcr_raw.query(f'sample != "Covid HH053"')
-    tcr_raw = tcr_raw.query('vgene.str.startswith("TRB")')
-    tcr_raw['vgene'] += "*01"
-    tcr_raw['jgene'] += "*01"
-    tcr_raw.reset_index(drop=True,inplace=True)
-    
-    return tcr_raw
+    return pose
 
 
 def testing_metrics(data, mets, dimensions, dataset_name):
@@ -123,7 +99,7 @@ def testing_metrics(data, mets, dimensions, dataset_name):
 
 
 
-def deseq2(count_matrix, design_matrix, gene_column, design_formula, results_dir):
+def deseq2(count_matrix, design_matrix, gene_column, design_formula, dir_path):
     
     """
     Function to normalize the raw transcript counts for further analysis.
@@ -156,12 +132,12 @@ def deseq2(count_matrix, design_matrix, gene_column, design_formula, results_dir
     dds_res = round(dds.normalized_count())
     dds_res.reset_index(drop = True, inplace = True)
     count_matrix.iloc[:,1:] = dds_res.iloc[:,:-1]
-    count_matrix.to_csv(results_dir, sep='\t')
+    count_matrix.to_csv(dir_path, sep='\t')
     return count_matrix
 
 
 
-def gene_mapping(normalized_counts, results_dir):
+def gene_mapping(normalized_counts, dir_path):
 
     """
     Function that connects to the Ensembl website and replaces the gene ids with their human interpretable
@@ -196,12 +172,12 @@ def gene_mapping(normalized_counts, results_dir):
     
     normalized_counts.dropna(how='any', inplace=True)
     normalized_counts.reset_index(drop = True, inplace = True)
-    normalized_counts = normalized_counts.to_csv(results_dir + '/normalized_counts_renamed.csv', sep='\t')
+    #normalized_counts.to_csv(dir_path + 'normalized_counts_renamed.csv', sep='\t')
     
     return normalized_counts
 
 
-def aggregate_modules(typ, normalized_count, data_dir, results_dir):
+def aggregate_modules(typ, normalized_count, data_dir, dir_path):
 
     """
     Function that uses a user defined operation to aggregate the transcript counts into the 
@@ -246,7 +222,7 @@ def aggregate_modules(typ, normalized_count, data_dir, results_dir):
             df_group = pca.fit_transform(scaler.fit_transform(df_group.drop(columns='genename').to_numpy().T)).T
             pose[group_name] = df_group.flatten().tolist()
 
-    pose.to_csv(results_dir + '/pca_aggregated.csv', sep='\t')
+    pose.to_csv(dir_path + 'pca_aggregated.csv', sep='\t')
 
     return pose
 
@@ -254,9 +230,8 @@ def aggregate_modules(typ, normalized_count, data_dir, results_dir):
 def spectral_clustering_custom(affinity, n_clusters):
 
     """
-    Function that uses a user defined operation to aggregate the transcript counts into the 
-    382 transcriptional modules of BloodGen3 from Altman et al, 2021  (https://doi.org/10.1038/s41467-021-24584-w). 
-
+    Wrapper function for the spectral clustering algorithm. It uses the precomputed similarity matrix provided.
+    
     Parameters
     ----------
     affinity : np.array
@@ -284,7 +259,6 @@ def spectral_clustering_custom(affinity, n_clusters):
 def lr_custom(data, meta, clus_labels, res_dir): 
     
     X = data.copy()
-    
     X['labels'] = clus_labels
 
     X_meta = pd.merge(X, meta, how = 'inner', left_on = 'Donor', right_on = 'Subjectnr')
@@ -296,34 +270,19 @@ def lr_custom(data, meta, clus_labels, res_dir):
     print(f'Size of metadata after NaNs removal: {X_meta.shape}')
 
     y = X_meta['labels']
+    X_meta.drop(columns = ['labels'], inplace=True)
     common_cols = [col for col in set(X_meta.columns).intersection(meta.columns)]
     X_meta = X_meta[common_cols]
     
-
-    # Get dummy variables
-
-    try:
-        X_meta = pd.get_dummies(X_meta,columns=['Gender'] ,drop_first=True)
-    except:
-        pass
-
-    try:
-        X_meta['Long covid'].replace({1.0: 'Yes', 0.0: 'No'}, inplace=True)
-        X_meta = pd.get_dummies(X_meta,columns=['Long covid'] ,drop_first=True)
-    except:
-        pass
+    X_meta['smoking'].replace({1.0: 'Yes', 0.0: 'No'}, inplace=True)
     
-    try:
-        X_meta['smoking'].replace({1.0: 'Yes', 0.0: 'No'}, inplace=True)
-        X_meta = pd.get_dummies(X_meta,columns=['smoking'] ,drop_first=True)
-    except:
-        pass
-
-    try:
-        X_meta = pd.get_dummies(X_meta,columns=['Group'])
-        X_meta.drop(columns = ['Group_control'], inplace=True)
-    except:
-        pass
+    # Get dummy variables
+    for categorical_col in ['Gender', 'smoking', 'Group']:
+        if categorical_col == 'Group':
+            X_meta = pd.get_dummies(X_meta,columns=['Group'])
+            X_meta.drop(columns = ['Group_control'], inplace=True)
+        else:
+            X_meta = pd.get_dummies(X_meta,columns=[categorical_col] ,drop_first=True)
   
 
     X = X.iloc[X_meta.index]
@@ -336,11 +295,9 @@ def lr_custom(data, meta, clus_labels, res_dir):
     
     # Normalize inputs aside for the binary features
     transf = X_meta.copy()
-
-    if 'Long covid_Yes' in X_meta.columns:
-        transf.loc[:, ~X_meta.columns.isin(['Gender_m', 'Long covid_Yes', 'Group_household member', 'Group_patient', 'smoking_Yes'])] = StandardScaler().fit_transform(X_meta.loc[:, ~X_meta.columns.isin(['Gender_m', 'Long covid_Yes', 'Group_household member', 'Group_patient', 'smoking_Yes'])].to_numpy())
-    else:
-        transf.loc[:, ~X_meta.columns.isin(['Gender_m', 'Group_household member', 'Group_patient', 'smoking_Yes'])] = StandardScaler().fit_transform(X_meta.loc[:, ~X_meta.columns.isin(['Gender_m', 'Group_household member', 'Group_patient', 'smoking_Yes'])].to_numpy())
+    transf.loc[:, ~X_meta.columns.isin(['Gender_m', 'Group_household member', 'Group_patient', 'smoking_Yes'])] = \
+        StandardScaler().fit_transform(X_meta.loc[:, ~X_meta.columns.isin(['Gender_m',
+                                                    'Group_household member', 'Group_patient', 'smoking_Yes'])].to_numpy())
     
     transf.columns = X_meta.columns
     
@@ -363,7 +320,6 @@ def lr_custom(data, meta, clus_labels, res_dir):
         print(f"{cluster}")
         y_mod = pd.Series([1 if clus == cluster else 0 for clus in y])
         lr = sm.Logit(y_mod, add_constant(transf, has_constant = 'add')).fit(method = 'bfgs', maxiter = 1000, full_output = True)
-        #lr = sm.Logit(y_mod, add_constant(transf)).fit_regularized(method = 'l1', max_iter = 1000)
         print(lr.summary())
             
         clusters.append(cluster)
@@ -372,6 +328,7 @@ def lr_custom(data, meta, clus_labels, res_dir):
 
         
     return significant_reg(clusters, parameters, pvalues, res_dir)
+
 
 
 def add_to_network(clusters, parameters, pvalues, origin, network):
@@ -388,6 +345,8 @@ def add_to_network(clusters, parameters, pvalues, origin, network):
     return network     
 
 
+
+# not used after development
 def gsea_analysis_multi(counts, clus_labels, res_dir, path_sets):
 
         for cluster in sorted(clus_labels.unique()):
@@ -463,12 +422,12 @@ def gsea_analysis_multi(counts, clus_labels, res_dir, path_sets):
                         pass
         
 
-def gsea_analysis_single(counts, clus_labels, res_dir, path_sets):
+def gsea_analysis(counts, clus_labels, res_dir, path_sets):
 
         results_pos = []
         results_neg = []
 
-        for cluster in sorted(clus_labels.unique()):
+        for cluster in sorted(set(clus_labels)):
 
                 #print(f'Cluster {cluster}')
                 rna_data = counts.copy()
@@ -515,15 +474,6 @@ def gsea_analysis_single(counts, clus_labels, res_dir, path_sets):
                         gsea_results_neg['cluster'] = cluster
                         results_neg.append(gsea_results_neg)
                         
-                        #########################################################################################################
-                        #terms = list(gs_res.res2d.Term)
-                        #genes = gs_res.res2d.Lead_genes[0].split(";")
-                        #import gseapy
-                        #gseapy.gseaplot(gs_res.ranking, term=terms[0], **gs_res.results[terms[0]])
-                        #ax = gseapy.heatmap(df = gs_res.heatmat.loc[genes], z_score=0, title=terms[0], figsize=(40,30))
-                        #plt.show()
-                        #########################################################################################################
-
 
                 if os.path.isfile('temp.cls'):
                         os.remove('temp.cls')
@@ -634,34 +584,38 @@ def cytof_clusters_analysis(cytof, clus_labels, res_dir):
     return (values, l2fcs, 'Cytof_clusters')
 
 
-def gsea_analysis_bacteria(counts, clus_labels, res_dir, path_sets):
+
+def gsea_analysis_bacteria(counts, clus_labels, processed_dir, res_dir, path_sets):
+        
 
         results_pos = []
         results_neg = []
-
+        
+        
         for cluster in sorted(clus_labels.unique()):
-
+                
+                if os.path.isfile('temp.cls'):
+                        os.remove('temp.cls')
+                        
                 print(f'Cluster {cluster}')
-                rna_data = counts.copy()
-
-                ### done to make have 'genename' as first column, otherwise GSEA will not run properly
-                rna_data.set_index('genename', inplace =True)
-                rna_data.reset_index(inplace = True)
+                micro_data = counts.copy()
+                ### done to make have 'taxaname' as first column, otherwise GSEA will not run properly
+                micro_data.set_index('taxaname', inplace =True)
+                micro_data.reset_index(inplace = True)
                 
                 clusters = pd.DataFrame()
                 clusters['Cluster'] = clus_labels
-                clusters.index = rna_data.drop(columns = 'genename').columns
-                clusters['Cluster'] = [clus if clus == cluster else 'Cluster Else' for clus in clusters['Cluster']]
+                clusters.index = micro_data.drop(columns = 'taxaname').columns
+                clusters['Cluster'] = [clus if clus == cluster else 'Cluster_Else' for clus in clusters['Cluster']]
                 clusters['Cluster'] = clusters['Cluster'].str.replace(' ', '_')
-
+                
                 with open('temp.cls', 'w') as cl:
                         line = f"{len(list(clusters['Cluster']))} 2 1\n# {cluster.replace(' ','_')} Cluster_Else\n" 
                         cl.write(line) 
                         cl.write(' '.join(list(clusters['Cluster'])) + '\n')
-
-
+                        
                 for sets in path_sets:
-                        gs_res = gsea(data=rna_data,
+                        gs_res = gsea(data=micro_data,
                                 gene_sets=sets,
                                 cls = 'temp.cls',
                                 permutation_type='phenotype', 
@@ -682,7 +636,7 @@ def gsea_analysis_bacteria(counts, clus_labels, res_dir, path_sets):
                         gsea_results_neg['cluster'] = cluster
                         
                         results_neg.append(gsea_results_neg)
-                        pd.DataFrame(gs_res.res2d).to_csv(f'{res_dir}bubbleplot_{cluster}.csv', sep='\t')
+                        pd.DataFrame(gs_res.res2d).to_csv(f'{processed_dir}bubbleplot_{cluster}.csv', sep='\t')
 
                 if os.path.isfile('temp.cls'):
                         os.remove('temp.cls')
@@ -720,6 +674,7 @@ def gsea_analysis_bacteria(counts, clus_labels, res_dir, path_sets):
         return returnable
 
 
+
 def plot_heatmaps_gsea_bacteria(res, micro_data, clus_labels, micro_taxa, res_dir):
 
 
@@ -728,10 +683,9 @@ def plot_heatmaps_gsea_bacteria(res, micro_data, clus_labels, micro_taxa, res_di
         taxa_list = [list(micro_taxa[micro_taxa['taxon_id'] == taxon]['taxon_name'])[0] for taxon in rel_counts.drop(columns = ['Donor']).columns]
         rel_counts.drop(columns = ['Donor'], inplace=True)
         rel_counts.columns = taxa_list
-
-
+        
         for family in res:
-                
+                print(family)
                 rel_counts['labels'] = clus_labels.copy()
                 rel_counts['labels'] = np.where(rel_counts['labels'] != family['target'], 'C Else', family['target'])
 
@@ -760,17 +714,13 @@ def plot_heatmaps_gsea_bacteria(res, micro_data, clus_labels, micro_taxa, res_di
                                                 label=label, linewidth=0)
                         img.ax_col_dendrogram.legend(title='Clusters', bbox_to_anchor=(-.1, .3), ncol=1)
 
+                plt.savefig(res_dir + 'heatmap_'+str(family['source'])+'_'+str(family['target'])+'.png', bbox_inches='tight', dpi=600)    
 
 
-                plt.savefig(res_dir + 'heatmap_'+str(family['source'])+'_'+str(rel_counts['labels'].unique()[0])+'.png', bbox_inches='tight', dpi=600)    
-                #plt.show()
 
-
-def stability_analysis(data, individuals, metric, dim , n_clusters, n_iterations = 10, n_ks = 10, ami_analysis = False):
+def stability_analysis(data, individuals, metric, dim , n_clusters, n_iterations = 10, n_ks = 10):
 
     silhouettes = []
-    amis = []
-
     cooccurrence = pd.DataFrame(0, index=np.arange(len(individuals)), columns=list(individuals))
     cooccurrence['Donor'] = individuals
 
@@ -788,22 +738,10 @@ def stability_analysis(data, individuals, metric, dim , n_clusters, n_iterations
             run = run.iloc[train_index,:]
             run.reset_index(drop=True,inplace = True)
 
-
-
-
             affinity = make_affinity(run.drop(columns='Donor'), metric = metric, K = dim, mu = .5, normalize = True)
             clus_labels = spectral_clustering_custom(affinity, n_clusters)
 
-
-            ############################################################
-            if ami_analysis:
-                amis.append(features_ami([(run.drop(columns='Donor'), metric)], clus_labels, dim, n_clusters))
-            ############################################################
-
-
-
             silhouettes.append(silhouette_score(affinity, clus_labels))
-
 
             one_hot = pd.DataFrame()
             one_hot['labels'] = clus_labels
@@ -823,6 +761,7 @@ def stability_analysis(data, individuals, metric, dim , n_clusters, n_iterations
     cooccurrence = cooccurrence/(n_iterations*(n_ks-1))
     np.fill_diagonal(cooccurrence.values, 0)
 
-    print(f'\n\nMean silhouette over the runs: {statistics.mean(silhouettes)}, standard deviation: {statistics.stdev(silhouettes)}')
+    print(f'\n\nMean silhouette over the runs: {statistics.mean(silhouettes)}, \
+          standard deviation: {statistics.stdev(silhouettes)}')
 
-    return cooccurrence, amis
+    return cooccurrence

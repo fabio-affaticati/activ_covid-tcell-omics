@@ -17,5 +17,5 @@ diff_abundance <- function(count_data, meta_data, form){
   #df7 <- mda.ancom(D)
 
   
-  return(rbind(df1$res, df2$res, df3$res, df5$res)) #df4$res))
+  return(rbind(df1$res, df2$res, df3$res, df5$res)) # df4$res
 }

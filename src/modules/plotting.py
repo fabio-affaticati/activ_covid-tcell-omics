@@ -29,10 +29,17 @@ from itertools import combinations
 import scikit_posthocs as sp
 from scipy.stats import fisher_exact
 
+from sklearn.manifold import MDS
+from sklearn.cluster import KMeans
+from scipy.spatial.distance import cdist
+
+
 
 random_state = 42
 
-def eigengap_visual(affinity, res_dir):
+
+
+def eigengap_visual(affinity, to_annotate, res_dir, plot_name = 'eigengap_visual.png'):
 
     """
     Calculate the Laplacian matrix from the affinity matrix provided. The eigenvalues of the
@@ -42,12 +49,14 @@ def eigengap_visual(affinity, res_dir):
     ----------
     affinity : np.array
         The similarity matrix for which to calculate the eigenvalues.
+    to_annotate : list
+        The eigenvalues to annotate with dashed lines and text.
     res_dir : str
         The directory path where to save the generated plots.
     """
 
     laplacian = csgraph.laplacian(affinity, normed=True)
-    
+
     # perform eigendecomposition and find eigengap
     eigenvalues = np.sort(np.linalg.eigvals(laplacian))
     plt.figure(figsize=(6, 4))
@@ -55,16 +64,25 @@ def eigengap_visual(affinity, res_dir):
 
     plt.scatter(np.arange(1,16), eigenvalues[:15], s=14, color='black')
     # Adding annotations for the 4th and 6th eigenvalues with dashed lines of different colors
-    #plt.axhline(y=eigenvalues[3]+0.02, linestyle='--', color='blue', linewidth=1, label='')
-    #plt.axhline(y=eigenvalues[5]+0.02, linestyle='--', color='red', linewidth=1, label='')
-
-    # Adding text annotations at the top of the lines
-    plt.text(4, eigenvalues[3]+0.03, '4th', horizontalalignment='right', color='blue')
-    plt.text(6, eigenvalues[5]+0.03, '6th', horizontalalignment='right', color='red')
     
-        # Highlight the 4th and 6th points with different colors
-    plt.scatter(4, eigenvalues[3], s=18, color='blue')
-    plt.scatter(6, eigenvalues[5], s=18, color='red')
+    for i,annotation in enumerate(to_annotate):
+    # Adding text annotations at the top of the lines
+        if annotation == 1:
+            text = '1st'
+        elif annotation == 2:
+            text = '2nd'
+        elif annotation == 3:
+            text = '3rd'
+        else:
+            text = f'{annotation}th'
+        
+        if (len(to_annotate) == 2) and (i == 0):
+            color = 'blue'
+        else:
+            color = 'red'
+        plt.text(annotation, eigenvalues[annotation-1]+0.03, text, horizontalalignment='right', color=color)
+        plt.axhline(y=eigenvalues[annotation-1]+0.02, linestyle='--', color=color, linewidth=1, label='')
+        plt.scatter(annotation, eigenvalues[annotation-1], s=18, color=color)
 
     # Customizing x and y ticks
     plt.xticks(np.arange(1, 16), fontsize=12, rotation=45)
@@ -74,13 +92,10 @@ def eigengap_visual(affinity, res_dir):
     plt.xlabel('Order')
     plt.ylabel('Eigenvalue')
 
-    # Adding legend
-    #plt.legend()
-
-    plt.savefig(res_dir + 'eigengap_visual.png', bbox_inches='tight', dpi=600)
+    plt.savefig(res_dir + plot_name, bbox_inches='tight', dpi=600)
 
 
-def draw_clustermap(clus_labels, affinity, res_dir, scaling = 'standard', shape = (5,5)):
+def draw_clustermap(clus_labels, affinity, res_dir, scaling = 'standard', shape = (5,5), plot_name = 'clustermap.png'):
     
     """
     Function to draw the squared affinity matrix, sorted by cluster labels, thus highlighting
@@ -143,78 +158,83 @@ def draw_clustermap(clus_labels, affinity, res_dir, scaling = 'standard', shape 
         img.ax_col_dendrogram.bar(0, 0, color=lut[label], label=label, linewidth=0)
         img.ax_col_dendrogram.legend(title='Clusters', bbox_to_anchor=(-.2, .5), ncol=1)
         
-    plt.savefig(res_dir + 'clustermap.png', bbox_inches='tight', dpi=600)    
+    plt.savefig(res_dir + plot_name, bbox_inches='tight', dpi=600)    
     plt.show()
 
 
-def features_ami(inputs, clus_labels, K, n_clusters, howmany = 20, plot_flag = False):
 
-    """
-    Function that computes the adjusted mutual information scores between the clustering using all
-    the features available and each separate feature. These values can be assumed to be a sort
-    of representation of the feature importance for the overarching clustering. 
+def plot_coclustering_probability(stability_df, comparison_df, clus_labels, res_dir):
 
-    Parameters
-    ----------
-    inputs : tuple
-        The first element is the feature matrix and the second is the metric to use to construct the
-        separate affinity matrices that will be used for clustering. The implementation works for more
-        than one dataset at a time (in case of integration).
-    clus_labels : pd.Series
-        The cluster membership tags, one for each patient.
-    K : int
-        Number of neighbors used to construct the similarity matrices.
-    n_clusters : int
-        Number of clusters that spectral clustering will generate.
-    howmany : int, optional
-        Number of top relevant features to plot.
-    """
-        
+    comparison_df['Clusters'] = clus_labels
+    comparison_df = comparison_df[['Clusters', 'Donor']]
+    stability_df.rename(columns={'level_0': 'Subjectnr', 0:'Co-ClusteringProbability'}, inplace=True)
+    stability_df = stability_df.query('Subjectnr != Donor')
+    stability_df['SortedCombination'] = stability_df.apply(lambda row: ''.join(sorted([row['Subjectnr'], row['Donor']])), axis=1)
 
-    ami = [np.empty(shape=(d.shape[-1])) for d, m in inputs]
-    
-
-    for ndtype, (dtype, metric) in enumerate(inputs):
-
-        for nfeature, feature in enumerate(np.asarray(dtype).T):
-
-            aff = snf.make_affinity(np.vstack(feature), K=K, mu=.5, metric=metric)
-
-            aff = np.nan_to_num(aff)
-
-            aff_labels = SpectralClustering(n_clusters=n_clusters, n_init = 100,
-                        affinity = 'precomputed', assign_labels='cluster_qr',
-                        random_state = random_state).fit_predict(aff)
-
-            ami[ndtype][nfeature] = adjusted_mutual_info_score(clus_labels, aff_labels)
+    stability_df = stability_df.drop_duplicates(subset='SortedCombination')
+    stability_df.sort_values(by='SortedCombination', inplace=True)
+    stability_df = pd.merge(stability_df, comparison_df, on = 'Donor')
+    stability_df.sort_values(by='Clusters', inplace=True)
+    ax = sns.displot(data=stability_df, x="Co-ClusteringProbability", kind="kde", hue = 'Clusters')
+    plt.grid(axis = 'y')
+    plt.savefig(res_dir + 'CoClusteringProbabilities.png', dpi=600)
 
     
-    for i,imp in enumerate(ami):
-        imp = pd.Series(imp)
-        
-        scores = imp.copy()
 
-        imp.index = inputs[i][0].columns
-        imp = imp.sort_values(ascending=False).iloc[:howmany].round(4)
-        imp = imp[::-1]
-        fig = px.bar(imp, text_auto='.3',orientation='h', width=600, height=500)
+def plot_mds_projection_cooccurrence(cooccurrence, clus_labels, clus_labels_RNA, res_dir, random_state = 42):
 
-        fig.update_layout(
-            xaxis_title="Adjusted Mutual Information (AMI) score",
-            yaxis_title="Feature",
-            xaxis_range=[imp[0]-imp[0]/10,imp[-1]],
-            font=dict(
-                family="Helvetica",
-                size=12,
-            ),
-            showlegend=False
-        )
+    # Convert similarity matrix to dissimilarity matrix (required for MDS)
+    dissimilarity_matrix = 1 - cooccurrence
 
-        if plot_flag:
-            fig.show()
+    # Apply Multidimensional Scaling (MDS)
+    mds = MDS(n_components=2, dissimilarity='precomputed', random_state=42, max_iter = 1000)
+    embedding = mds.fit_transform(dissimilarity_matrix)
+
+    # Create a DataFrame for Seaborn
+    df = pd.DataFrame({'X': embedding[:, 0], 'Y': embedding[:, 1], 'Cluster': clus_labels})
+    df.sort_values(by='Cluster', inplace=True)
+
+    # Plot the scatter plot with Seaborn
+    plt.figure(figsize=(8, 6))
+    sns.scatterplot(x='X', y='Y', hue='Cluster', data=df, palette='Set2', edgecolor='k', style = 'Cluster', s=100)
+
+
+    # Show the plot
+    plt.title('MDS stability - spectral clustering')
+    plt.xlabel('Dimension 1')
+    plt.ylabel('Dimension 2')
+    plt.savefig(res_dir + 'MDS_stability.png', bbox_inches='tight', dpi=600)
     
-    return scores
+    
+    
+    df = pd.DataFrame({'X': embedding[:, 0], 'Y': embedding[:, 1], 'Cluster': clus_labels_RNA})
+    kmeans = KMeans(n_clusters=7, random_state=0, n_init="auto").fit(df[['X', 'Y']])
+    df['kmeans_labels'] = kmeans.labels_
 
+
+    # Compute Euclidean distances to assigned centroids
+    distances = cdist(df[['X', 'Y']], kmeans.cluster_centers_, metric='euclidean')
+    distances = pd.Series([d[l] for l, d in zip(kmeans.labels_, distances)])
+
+    # Set a threshold for identifying distant points
+    threshold = .2  # Adjust as needed
+
+    # Identify distant points
+    df.loc[df[distances > threshold].index, 'Cluster'] = '-1'
+    df['Cluster'].replace({'-1': 'Unstable'}, inplace=True)
+    df.sort_values(by='Cluster', inplace=True)
+
+    plt.figure(figsize=(8, 6))
+    sns.scatterplot(x='X', y='Y', hue='Cluster', data=df, palette='Set2', edgecolor='k', style = 'Cluster', s=100)
+
+
+    # Show the plot
+    plt.title('MDS stability - Kmeans')
+    plt.xlabel('Dimension 1')
+    plt.ylabel('Dimension 2')
+    plt.savefig(res_dir + 'MDS_stability_kmeans.png', bbox_inches='tight', dpi=600)
+    
+    
 
 def convert_pvalue_to_asterisks(pvalue):
     if pvalue <= 0.0001:
@@ -226,6 +246,7 @@ def convert_pvalue_to_asterisks(pvalue):
     elif pvalue < 0.05:
         return "*"
     return ""
+
 
 
 def significant_reg(clusters, parameters, pvalues, res_dir):
@@ -256,40 +277,6 @@ def significant_reg(clusters, parameters, pvalues, res_dir):
     return clusters, param_coefs, pvalues
 
 
-def draw_pca(data, meta_data, color_variable, symbol_variable, name):
-
-    transf = StandardScaler().fit_transform(data.to_numpy())
-
-    pca = PCA(n_components=2)
-    pca.fit(transf)
-    pca_result = pca.transform(transf)
-
-    df = pd.DataFrame()
-    df['pca-one'] = pca_result[:,0]
-    df['pca-two'] = pca_result[:,1]
-    df[color_variable] = meta_data[color_variable]
-    df[symbol_variable] = meta_data[symbol_variable]
-    
-    fig = px.scatter(df, x='pca-one', y='pca-two', color=color_variable, symbol=symbol_variable,
-                     labels={
-                         "pca-one": "PC1 (var = %.2f)" %
-                                 pca.explained_variance_ratio_[0],
-                         "pca-two": "PC2 (var = %.2f)" %
-                                 pca.explained_variance_ratio_[1],
-                     },
-                     )
-    fig.update_layout(font=dict(
-                    size=10),
-                    legend_title="",
-                    width=600,
-                    height=400)
-    fig.update_traces(marker=dict(size=6,))
-    fig.update_yaxes(showticklabels=False)
-    fig.update_xaxes(showticklabels=False)
-    #fig.write_image(results_dir + "pca.png", height=600, width=900, scale = 4)
-    #fig.write_html(results_dir + "pca_all_genes.html")
-    fig.show()
-
 
 def mann_sign(data_tuples, clus_labels, res_dir):  
 
@@ -303,7 +290,7 @@ def mann_sign(data_tuples, clus_labels, res_dir):
         if tup[1] == 'Cytof' or tup[1] == 'TCR':
             
 
-            for cluster in sorted(clus_labels.unique()):
+            for cluster in sorted(set(clus_labels)):
 
                 y_mod = pd.Series([1 if clus == cluster else 0 for clus in clus_labels])
 
@@ -346,7 +333,6 @@ def mann_sign(data_tuples, clus_labels, res_dir):
                 values[col] = multipletests(pvals = values[col], alpha = .05, method = 'bonferroni')[1]
                 values[col] = values[col].apply(convert_pvalue_to_asterisks)
       
-            
                 
             plt.figure(figsize = (6,3))
             sns.heatmap(np.array(l2fcs).T,
@@ -370,6 +356,7 @@ def mann_sign(data_tuples, clus_labels, res_dir):
         return returnable
     
 
+
 def micro_analysis(data, clus_labels, micro_taxa, res_dir):
 
     pandas2ri.activate()
@@ -387,15 +374,17 @@ def micro_analysis(data, clus_labels, micro_taxa, res_dir):
     
     
     meta_data = pd.DataFrame(people)
-    meta_data['cluster'] = clus_labels.copy()
-    meta_data['cluster'] = [int(cl.split(' ')[1]) for cl in clus_labels]
+    meta_data['cluster'] = clus_labels
+    meta_data['cluster'] = [int(list(clus_labels.unique()).index(cl)) for cl in clus_labels]
+
     meta_data.set_index('Donor',inplace = True)
     meta_data = pd.get_dummies(meta_data,columns=['cluster'], prefix='cluster', prefix_sep='_')
 
-    form = ['~ cluster_'+ str(c.split(' ')[1]) for c in clus_labels.unique()]
+    form = ['~ cluster_'+ str(list(clus_labels.unique()).index(c)) for c in clus_labels.unique()]
 
     res = da(count_data.set_index('Donor'), meta_data, form)
     res = ro.conversion.rpy2py(res)
+    
 
     sel = res[res['qvalue'] < 0.05]
     sel = sel.groupby(['taxa','variable']).size().reset_index(name='counts')
@@ -418,7 +407,9 @@ def micro_analysis(data, clus_labels, micro_taxa, res_dir):
 
         sig  = sel.copy()
         sig['family'] = [list(micro_taxa[micro_taxa['taxon_name'] == taxon]['family'])[0] for taxon in sig['taxa']]
-        sig['variable']=['C ' + g.split('_')[1] for g in sig['variable']]
+        print([list(clus_labels.unique())[int(g.split('_')[1])] for g in sig['variable']])
+        sig['variable'] = [list(clus_labels.unique())[int(g.split('_')[1])] for g in sig['variable']]
+        sig.rename(columns = {'counts': 'number_of_positive_tests '}, inplace = True)
         
 
         order = sorted(clus_labels.unique()).copy()
@@ -454,13 +445,10 @@ def micro_analysis(data, clus_labels, micro_taxa, res_dir):
                         size=12),
                         legend_title="Cluster",
                         xaxis=dict(
-                            #showgrid=False,
                             showline=True,
                             linecolor='rgb(102, 102, 102)',
                             tickfont_color='rgb(102, 102, 102)',
                             showticklabels=True,
-                            #dtick=10,
-                            #ticks='outside',
                             tickcolor='rgb(102, 102, 102)',
                         ),
                         xaxis_title="Log2FC",
@@ -478,11 +466,8 @@ def micro_analysis(data, clus_labels, micro_taxa, res_dir):
         fig.add_vline(x=-1, line_width=1, line_dash='dash')
         
         sig.to_csv(res_dir + 'sig_microbiome.csv', index = False)
-        fig.write_image(res_dir + "LFC_taxa_scatter.png", height=1000, width=800, scale = 4, engine="kaleido")
-        fig.show()
-
-
-
+        fig.write_image(res_dir + "LFC_taxa_scatter.png", height=1000, width= 1800, scale = 2, engine="kaleido")
+        #fig.show()
 
 
         ############### select only top 10 by effect size
@@ -497,8 +482,10 @@ def micro_analysis(data, clus_labels, micro_taxa, res_dir):
                 returnable.append({'source': row['taxa'], 'target': 'C ' + row['variable'].split('_')[1], 
                                         'weight': (effectsize/2), 'origin': 'Micro'})
         return returnable
+    
     else:
         print('No Differentially Abundant Bacteria, select different parameters.')
+
 
 
 def draw_network(network, clus_labels, res_dir):
@@ -587,34 +574,6 @@ def draw_network(network, clus_labels, res_dir):
     return(net)
 
 
-def ami_boxplots(amis, features, res_dir, top_x_features = 20):
-
-    scores = pd.DataFrame([list(el) for el in amis], columns = features)
-    scores = scores.reindex(scores.mean().sort_values(ascending=False).index, axis=1)
-
-    scores = scores.iloc[:,:top_x_features]
-
-    sns.set_style("whitegrid")
-    sns.set_palette("deep")
-
-    plt.figure(figsize=(8,8))
-
-            
-    sns.swarmplot(data=scores,linewidth=.5, orient="h", size=2)
-
-    #sns.stripplot(data=scores, color="0.25", size=2, orient="h")
-
-    sns.boxplot(data=scores, dodge= False, saturation = 0, width=0.3, showfliers=False, orient="h")
-
-    plt.tight_layout()
-    plt.legend([],[], frameon=False)
-    plt.ylabel(f'Top {top_x_features} Features')
-    #plt.grid(axis='x')
-    plt.grid(axis='y')
-    plt.xlabel("AMI scores (Feature importance)")
-    plt.savefig(res_dir + "AMI_boxplots.png", dpi=600, bbox_inches='tight')
-    plt.show()
-
 
 def alpha_diversity_microbiome(abundances, patients, clus_labels, res_dir):
 
@@ -632,15 +591,17 @@ def alpha_diversity_microbiome(abundances, patients, clus_labels, res_dir):
     print(stat)
 
 
-    fig, axes = plt.subplots(1, 3, figsize=(14, 8))
+    fig, axes = plt.subplots(1, 3, figsize=(14, 10))
     
     for i, metric in enumerate(['Shannon index', 'Simpson index', 'Chao1 richness']):
 
-        order = sorted(stat['Cluster'].unique())
+        order = list(stat['Cluster'].unique())
+        print(order)
         pairs = list(combinations(order,2))
+        print(pairs)
         dunn = sp.posthoc_dunn([stat[stat['Cluster'] == uni][metric] for uni in order], p_adjust = 'bonferroni')
-
-        dunn = [str(convert_pvalue_to_asterisks(dunn.iloc[int(pair[0].split(' ')[1]), int(pair[1].split(' ')[1])])) for pair in pairs]
+        print(dunn)
+        dunn = [str(convert_pvalue_to_asterisks(dunn.iloc[int(order.index(pair[0])), int(order.index(pair[1]))])) for pair in pairs]
         dunn = ['ns' if el == '' else el for el in dunn]
 
         sns.swarmplot(data=stat, y = metric, x = 'Cluster',hue = 'Cluster', linewidth=.5, size=4, order=order, ax=axes[i])
@@ -651,12 +612,11 @@ def alpha_diversity_microbiome(abundances, patients, clus_labels, res_dir):
         annotator = Annotator(axes[i], pairs, data=stat,  y = metric, x = 'Cluster', order=order)
         annotator.configure(loc='outside')
         annotator.set_custom_annotations(dunn)
-        #annotator.configure(test='Mann-Whitney', text_format='star', loc='outside', comparisons_correction="Bonferroni", verbose=2)
         annotator.annotate()
-    
+        # rotate axis labels by 45 degrees
+        
         axes[i].get_legend().remove()
-
-    #plt.legend([],[], frameon=False)
+        axes[i].set_xticklabels(axes[i].get_xticklabels(), rotation=45)
 
     fig.savefig(res_dir + 'alpha_diversity_microbiome.png', dpi=600, bbox_inches='tight')
     plt.show()
