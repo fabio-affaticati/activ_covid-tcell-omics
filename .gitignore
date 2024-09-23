@@ -130,8 +130,9 @@ cython_debug/
 
 # Directories
 data/processed_data/
-data/microbiome_analysis/
-data/TCR_seq/
+data/TCR_seq/run1/
+data/TCR_seq/run2/
+data/TCR_seq/run3/
 manuscript/
 results/
 presentations/
