@@ -2,7 +2,7 @@
 
 All data and scripts to reproduce the results from the 'Bridging immunotypes and enterotypes using a systems immunology approach' study.
 
-## 1. Summary:
+## 1. - Summary:
 
 Recent advances in multi-omics analyses have revolved mainly around well established, directly
 determinable molecular relationships such as the protein synthesis cascade and epigenetic
@@ -20,10 +20,10 @@ marker.
 
 
 
-## 2. Dependencies
+## 2. - Dependencies:
 
 
-### 2.1 Python dependencies
+### 2.1 - Python dependencies
 **Python Version:** 3.11.9
 
 Data manipulation:
@@ -57,7 +57,7 @@ Misc:
 - snfpy==0.2.2
 
 
-### 2.2 R dependencies
+### 2.2 - R dependencies
 **R Version:** 4.3.3
 Data manipulation:
 - tidyverse==2.0.0
