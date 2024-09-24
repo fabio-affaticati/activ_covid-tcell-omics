@@ -27,8 +27,12 @@ presentations/
 graph_files/
 test_files/
 docs/
+lib/
 
 # R files
 *.RData
 *.Rhistory
 *.Rproj
+
+
+.gitignore

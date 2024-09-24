@@ -44,6 +44,7 @@ Data visualisation:
 - matplotlib==3.7.1
 - seaborn==0.11.2
 - plotly==5.24.1
+- kaleido-0.2.1
 - colormap==1.1.0
 - networkx==3.3
 - pyvis==0.3.2

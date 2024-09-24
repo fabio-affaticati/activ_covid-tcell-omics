@@ -28,6 +28,7 @@ joblib==1.4.2
 jsonpickle==3.3.0
 jupyter_client==8.6.3
 jupyter_core==5.7.2
+kaleido==0.2.1
 kiwisolver==1.4.7
 MarkupSafe==2.1.5
 matplotlib==3.7.1
