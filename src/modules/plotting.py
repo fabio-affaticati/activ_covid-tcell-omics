@@ -1,27 +1,21 @@
 import numpy as np
 import pandas as pd
+import os
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
-import snf
-import os
+
 from scipy.sparse import csgraph
 from pyvis.network import Network
 from colormap import rgb2hex
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from sklearn.decomposition import PCA
-from sklearn.cluster import SpectralClustering
-
 from scipy.stats import mannwhitneyu, kruskal
-from sklearn.metrics import adjusted_mutual_info_score
 from statsmodels.sandbox.stats.multicomp import multipletests
-
-from src.modules.py_deseq import py_DESeq2
 
 import rpy2.robjects as ro
 from rpy2.robjects.packages import importr
-from rpy2.robjects import r, pandas2ri
 
 from statannotations.Annotator import Annotator
 from skbio.diversity import alpha_diversity
@@ -32,8 +26,6 @@ from scipy.stats import fisher_exact
 from sklearn.manifold import MDS
 from sklearn.cluster import KMeans
 from scipy.spatial.distance import cdist
-
-
 
 random_state = 42
 
@@ -359,7 +351,7 @@ def mann_sign(data_tuples, clus_labels, res_dir):
 
 def micro_analysis(data, clus_labels, micro_taxa, res_dir):
 
-    pandas2ri.activate()
+    ro.pandas2ri.activate()
     importr('multidiffabundance')
     ro.r('''
         source('src/modules/tools.r')

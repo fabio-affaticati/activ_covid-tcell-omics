@@ -1,26 +1,30 @@
 import pandas as pd
 import numpy as np
 import re
-from gseapy import dotplot, gsea
 import os
+
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 from pybiomart import Server
+
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import KFold
 from sklearn.cluster import SpectralClustering
-from snf.metrics import silhouette_score
+
 import statsmodels.api as sm
 from scipy.stats import mannwhitneyu
 from scipy.sparse import csgraph
 from statsmodels.sandbox.stats.multicomp import multipletests
 from statsmodels.tools.tools import add_constant
 import statistics
-from snf import make_affinity
+
+import snf
 
 import warnings
 
+from gseapy import dotplot, gsea
 
 from src.modules.py_deseq import py_DESeq2
 from src.modules.plotting import significant_reg, convert_pvalue_to_asterisks
@@ -251,7 +255,7 @@ def spectral_clustering_custom(affinity, n_clusters):
     
     clus_labels = ['C ' + str(el) for el in list(clus_labels)]
 
-    print(f'Silhouette score: {silhouette_score(affinity, clus_labels)}')
+    print(f'Silhouette score: {snf.metrics.silhouette_score(affinity, clus_labels)}')
 
     return pd.Series(clus_labels)
 
@@ -585,7 +589,7 @@ def cytof_clusters_analysis(cytof, clus_labels, res_dir):
 
 
 
-def gsea_analysis_bacteria(counts, clus_labels, processed_dir, res_dir, path_sets):
+def gsea_analysis_bacteria(counts, clus_labels, bubble_dir, res_dir, path_sets):
         
 
         results_pos = []
@@ -636,7 +640,7 @@ def gsea_analysis_bacteria(counts, clus_labels, processed_dir, res_dir, path_set
                         gsea_results_neg['cluster'] = cluster
                         
                         results_neg.append(gsea_results_neg)
-                        pd.DataFrame(gs_res.res2d).to_csv(f'{processed_dir}bubbleplot_{cluster}.csv', sep='\t')
+                        pd.DataFrame(gs_res.res2d).to_csv(f'{bubble_dir}bubbleplot_{cluster}.csv', sep='\t')
 
                 if os.path.isfile('temp.cls'):
                         os.remove('temp.cls')
@@ -738,10 +742,10 @@ def stability_analysis(data, individuals, metric, dim , n_clusters, n_iterations
             run = run.iloc[train_index,:]
             run.reset_index(drop=True,inplace = True)
 
-            affinity = make_affinity(run.drop(columns='Donor'), metric = metric, K = dim, mu = .5, normalize = True)
+            affinity = snf.make_affinity(run.drop(columns='Donor'), metric = metric, K = dim, mu = .5, normalize = True)
             clus_labels = spectral_clustering_custom(affinity, n_clusters)
 
-            silhouettes.append(silhouette_score(affinity, clus_labels))
+            silhouettes.append(snf.metrics.silhouette_score(affinity, clus_labels))
 
             one_hot = pd.DataFrame()
             one_hot['labels'] = clus_labels

@@ -59,6 +59,7 @@ Misc:
 
 ### 2.2 R dependencies:
 **R Version:** 4.3.3
+
 Data manipulation:
 - tidyverse==2.0.0
 - tidyr==1.3.1
