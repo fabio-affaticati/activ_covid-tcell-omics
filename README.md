@@ -2,7 +2,7 @@
 
 All data and scripts to reproduce the results from the 'Bridging immunotypes and enterotypes using a systems immunology approach' study.
 
-## 1. - Summary:
+## 1. Summary:
 
 Recent advances in multi-omics analyses have revolved mainly around well established, directly
 determinable molecular relationships such as the protein synthesis cascade and epigenetic
