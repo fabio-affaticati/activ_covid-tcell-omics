@@ -399,7 +399,7 @@ def micro_analysis(data, clus_labels, micro_taxa, res_dir):
 
         sig  = sel.copy()
         sig['family'] = [list(micro_taxa[micro_taxa['taxon_name'] == taxon]['family'])[0] for taxon in sig['taxa']]
-        print([list(clus_labels.unique())[int(g.split('_')[1])] for g in sig['variable']])
+        
         sig['variable'] = [list(clus_labels.unique())[int(g.split('_')[1])] for g in sig['variable']]
         sig.rename(columns = {'counts': 'number_of_positive_tests '}, inplace = True)
         
@@ -588,11 +588,11 @@ def alpha_diversity_microbiome(abundances, patients, clus_labels, res_dir):
     for i, metric in enumerate(['Shannon index', 'Simpson index', 'Chao1 richness']):
 
         order = list(stat['Cluster'].unique())
-        print(order)
+
         pairs = list(combinations(order,2))
-        print(pairs)
+
         dunn = sp.posthoc_dunn([stat[stat['Cluster'] == uni][metric] for uni in order], p_adjust = 'bonferroni')
-        print(dunn)
+
         dunn = [str(convert_pvalue_to_asterisks(dunn.iloc[int(order.index(pair[0])), int(order.index(pair[1]))])) for pair in pairs]
         dunn = ['ns' if el == '' else el for el in dunn]
 

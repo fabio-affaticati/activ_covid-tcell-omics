@@ -1,0 +1,476 @@
+taxa,variable,number_of_positive_tests ,effectsize,family
+Prevotella 1,M&R Upregulated metabolic sets,2,-2.074200576524734,Prevotellaceae
+Prevotella 1,M&R CMV seropositive,2,-1.1218228917946265,Prevotellaceae
+Prevotella 1,M&R Higher BMI (Prevotella),4,1.152134944757533,Prevotellaceae
+Blautia 2,M&R Ruminococcaceae & Christensenellaceae - driven,3,-0.25580173346465945,Lachnospiraceae
+Sporobacter 27,M&R Higher BMI (Prevotella),2,-0.3785985147122881,Ruminococcaceae
+AB009176_g 25,M&R CMV seropositive,3,0.5480084874066758,Ruminococcaceae
+AB009176_g 25,M&R Higher BMI (Prevotella),2,-0.6611424308126682,Ruminococcaceae
+Odoribacter 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.14404062469319057,Odoribacteraceae
+Odoribacter 1,M&R Higher BMI (Prevotella),2,-0.34308743237260403,Odoribacteraceae
+Eubacterium_g8 1,M&R Higher BMI (Prevotella),2,-0.6296375257365828,Ruminococcaceae
+Clostridium_g6 2,M&R Upregulated metabolic sets,3,0.6135145299616948,Erysipelotrichaceae
+Clostridium_g6 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.582843154223109,Erysipelotrichaceae
+Clostridium_g6 2,M&R Higher BMI (Prevotella),2,-0.3709326113926987,Erysipelotrichaceae
+Bacteroides 16,M&R Upregulated metabolic sets,4,0.9410522534192222,Bacteroidaceae
+Bacteroides 16,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.531500714003539,Bacteroidaceae
+Bacteroides 16,M&R Higher BMI (Prevotella),3,-1.3142698180231536,Bacteroidaceae
+Eubacterium_g7 1,M&R Upregulated metabolic sets,3,-2.0240249594849855,Lachnospiraceae
+Prevotella 2,M&R Upregulated metabolic sets,3,-2.7607677326986013,Prevotellaceae
+Prevotella 2,M&R CMV seropositive,2,-1.568560775527114,Prevotellaceae
+Prevotella 2,M&R Higher BMI (Prevotella),3,1.1161464607033282,Prevotellaceae
+Ruminococcus_g4 4,M&R Higher BMI (Prevotella),3,-0.7539642056197112,Lachnospiraceae
+Alistipes 4,M&R Upregulated metabolic sets,2,-1.6962386088302563,Rikenellaceae
+Alistipes 4,M&R Ruminococcaceae & Christensenellaceae - driven,2,1.833401999160302,Rikenellaceae
+Alistipes 4,M&R CMV seropositive,2,-1.112228885798258,Rikenellaceae
+Lachnospira 2,M&R CMV seropositive,3,0.5469334958281934,Lachnospiraceae
+Lachnospira 2,M&R Higher BMI (Prevotella),2,-0.5032368887975716,Lachnospiraceae
+Butyricicoccus 5,M&R Higher BMI (Prevotella),2,-0.3107925781895579,Ruminococcaceae
+LARJ_g 3,M&R Upregulated metabolic sets,2,-0.8135891010983476,Rhodospirillaceae
+LARJ_g 3,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5646900646363885,Rhodospirillaceae
+LARJ_g 3,M&R Higher BMI (Prevotella),2,-1.0969123763676458,Rhodospirillaceae
+LARJ_g 2,M&R Higher BMI (Prevotella),2,-1.1218653904233702,Rhodospirillaceae
+Clostridium 3,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.9508871420042571,Clostridiaceae
+Clostridium 3,M&R Higher BMI (Prevotella),2,-1.578241524384467,Clostridiaceae
+Bacteroides 20,M&R Upregulated metabolic sets,2,0.8710784068063447,Bacteroidaceae
+Bacteroides 20,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.5059847782451886,Bacteroidaceae
+Alistipes 5,M&R Upregulated metabolic sets,2,-0.5778286195395816,Rikenellaceae
+Alistipes 5,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.6469427188335626,Rikenellaceae
+Alistipes 5,M&R Higher BMI (Prevotella),3,-0.6688785725274404,Rikenellaceae
+Clostridium_g21 1,M&R Upregulated metabolic sets,2,0.7266273604998106,Lachnospiraceae
+Oscillibacter 7,M&R Upregulated metabolic sets,4,0.811017071500528,Ruminococcaceae
+Oscillibacter 7,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.5222171949108607,Ruminococcaceae
+Oscillibacter 7,M&R Higher BMI (Prevotella),2,-0.4916659333481675,Ruminococcaceae
+Subdoligranulum 3,M&R Higher BMI (Prevotella),2,-0.6450634232436393,Ruminococcaceae
+Bacteroides 21,M&R CMV seropositive,2,-1.6497961625108817,Bacteroidaceae
+LLKB_g 1,M&R Upregulated metabolic sets,2,-0.4475662649407151,Lachnospiraceae
+Alistipes 7,M&R Upregulated metabolic sets,2,0.6920621429853233,Rikenellaceae
+Alistipes 7,M&R Higher BMI (Prevotella),2,-0.7630331959968009,Rikenellaceae
+Parasutterella 2,M&R Upregulated metabolic sets,2,-1.057448195779768,Sutterellaceae
+Parasutterella 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.521641325086316,Sutterellaceae
+Oscillibacter 6,M&R Upregulated metabolic sets,3,-1.7526328701581586,Ruminococcaceae
+Oscillibacter 6,M&R Ruminococcaceae & Christensenellaceae - driven,2,1.7358849423184592,Ruminococcaceae
+Oscillibacter 6,M&R Higher BMI (Prevotella),3,-1.3243799593962255,Ruminococcaceae
+Eubacterium_g17 1,M&R Upregulated metabolic sets,3,-0.7446799134961883,Lachnospiraceae
+Eubacterium_g17 1,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.6112939379507397,Lachnospiraceae
+FR888536_g 1,M&R Upregulated metabolic sets,2,-1.2803442286963935,FR888536_f
+FR888536_g 1,M&R CMV seropositive,2,0.5377779024482634,FR888536_f
+HQ716403_g 1,M&R Upregulated metabolic sets,2,-0.6340796941434486,Christensenellaceae
+HQ716403_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,4,0.7377454844118693,Christensenellaceae
+HQ716403_g 1,M&R CMV seropositive,2,-0.5506542547644946,Christensenellaceae
+HQ716403_g 1,M&R Higher BMI (Prevotella),2,-0.7417075310298755,Christensenellaceae
+Sporobacter 3,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.6686798228712126,Ruminococcaceae
+Blautia 7,M&R Upregulated metabolic sets,2,-0.646796597563352,Lachnospiraceae
+Escherichia 1,M&R Upregulated metabolic sets,4,0.952555442915774,Enterobacteriaceae
+Escherichia 1,M&R Higher BMI (Prevotella),2,-1.047096917141246,Enterobacteriaceae
+Eubacterium_g20 1,M&R Upregulated metabolic sets,2,-0.49501619833964233,Lachnospiraceae
+Barnesiella 1,M&R Higher BMI (Prevotella),2,-2.1718245440909643,Porphyromonadaceae
+GQ896819_g 1,M&R Upregulated metabolic sets,3,-0.880625599260592,Ruminococcaceae
+GQ896819_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5143018259375355,Ruminococcaceae
+Sporobacter 4,M&R Upregulated metabolic sets,3,-2.21082926870301,Ruminococcaceae
+Sporobacter 4,M&R Ruminococcaceae & Christensenellaceae - driven,4,1.1563507176393433,Ruminococcaceae
+Sporobacter 4,M&R Higher BMI (Prevotella),2,-1.1114172500134056,Ruminococcaceae
+EU842423_g 1,M&R Upregulated metabolic sets,3,-1.4125084895043412,Lachnospiraceae
+Blautia 8,M&R Upregulated metabolic sets,2,-1.802526148548715,Lachnospiraceae
+Barnesiella 3,M&R Higher BMI (Prevotella),2,-1.237278213528334,Porphyromonadaceae
+Murimonas 1,M&R CMV seropositive,2,0.33545911551465823,Lachnospiraceae
+AB239481_g 1,M&R Upregulated metabolic sets,2,-0.7075724141567791,Christensenellaceae
+AB239481_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.6771103914385622,Christensenellaceae
+Terrisporobacter 1,M&R Upregulated metabolic sets,2,-0.5941034623654522,Peptostreptococcaceae
+Terrisporobacter 1,M&R CMV seropositive,2,-0.6477628233511421,Peptostreptococcaceae
+Eubacterium_g23 2,M&R Upregulated metabolic sets,2,-0.8820924709029977,Ruminococcaceae
+Desulfovibrio 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.7021722452033189,Desulfovibrionaceae
+Desulfovibrio 1,M&R CMV seropositive,2,-0.8435457465391608,Desulfovibrionaceae
+Desulfovibrio 1,M&R Higher BMI (Prevotella),2,-0.9782698286168947,Desulfovibrionaceae
+Clostridium_g24 3,M&R Upregulated metabolic sets,3,0.9883724775432068,Lachnospiraceae
+Clostridium_g24 3,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.6905721711362142,Lachnospiraceae
+GQ422712_g 1,M&R Upregulated metabolic sets,3,-1.4663323521638585,Christensenellaceae
+GQ422712_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,4,2.039505157462023,Christensenellaceae
+GQ422712_g 1,M&R Higher BMI (Prevotella),2,-1.339001485998701,Christensenellaceae
+Romboutsia 1,M&R Higher BMI (Prevotella),2,-0.629222101659384,Peptostreptococcaceae
+Barnesiella 2,M&R Higher BMI (Prevotella),2,-1.0446235944136415,Porphyromonadaceae
+GU303868_g 1,M&R Upregulated metabolic sets,2,-1.3732429786416498,S24-7_f
+GU303868_g 1,M&R Higher BMI (Prevotella),2,0.4591071506872749,S24-7_f
+Eubacterium_g8 2,M&R Upregulated metabolic sets,3,-1.5805454568579904,Ruminococcaceae
+Eubacterium_g8 2,M&R Higher BMI (Prevotella),2,-0.5399202780912773,Ruminococcaceae
+Oscillibacter 9,M&R Higher BMI (Prevotella),2,-0.8558739461457479,Ruminococcaceae
+Lachnospira 5,M&R CMV seropositive,3,0.5503245494919548,Lachnospiraceae
+Bacteroides 1,M&R Upregulated metabolic sets,3,0.558949296653816,Bacteroidaceae
+Bacteroides 1,M&R Higher BMI (Prevotella),2,-0.469902337708413,Bacteroidaceae
+Bifidobacterium 4,M&R Higher BMI (Prevotella),2,-0.8353137115214655,Bifidobacteriaceae
+Parabacteroides 2,M&R Higher BMI (Prevotella),2,-0.5736340390256989,Porphyromonadaceae
+Butyrivibrio_g1 2,M&R Upregulated metabolic sets,2,-1.2006392033345759,Lachnospiraceae
+Butyrivibrio_g1 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5097265226530162,Lachnospiraceae
+Butyrivibrio_g1 2,M&R Higher BMI (Prevotella),3,-1.9146018857623908,Lachnospiraceae
+Pseudoflavonifractor 1,M&R Higher BMI (Prevotella),2,-0.49574678098204555,Ruminococcaceae
+AB009176_g 1,M&R Upregulated metabolic sets,3,-1.4996276933398185,Ruminococcaceae
+AB009176_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.8873775286496535,Ruminococcaceae
+AB009176_g 1,M&R Higher BMI (Prevotella),3,-1.6299968156435258,Ruminococcaceae
+Victivallis 1,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.5840751820739505,Victivallaceae
+Victivallis 1,M&R CMV seropositive,2,-0.6012479217282442,Victivallaceae
+Victivallis 1,M&R Higher BMI (Prevotella),2,-0.8379969832089226,Victivallaceae
+Holdemanella 1,M&R Upregulated metabolic sets,3,-1.7613166055668987,Erysipelotrichaceae
+Holdemanella 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.49243268341868307,Erysipelotrichaceae
+Holdemanella 1,M&R Higher BMI (Prevotella),2,0.9253404212098953,Erysipelotrichaceae
+Oscillibacter 11,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5592073509603182,Ruminococcaceae
+Oscillibacter 11,M&R Higher BMI (Prevotella),2,-0.8525670612935319,Ruminococcaceae
+Butyricicoccus 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.6924516326612709,Ruminococcaceae
+Sporobacter 6,M&R Higher BMI (Prevotella),2,-0.8711265503788328,Ruminococcaceae
+Bacteroides 6,M&R Upregulated metabolic sets,3,0.5362332127603429,Bacteroidaceae
+Pseudoflavonifractor 3,M&R Upregulated metabolic sets,4,1.2211171393340758,Ruminococcaceae
+Pseudoflavonifractor 3,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.8689453106446134,Ruminococcaceae
+Pseudoflavonifractor 3,M&R Higher BMI (Prevotella),2,-1.1647222613176311,Ruminococcaceae
+Paraprevotella 2,M&R CMV seropositive,2,-1.6253223444461462,Prevotellaceae
+Caproiciproducens 2,M&R Upregulated metabolic sets,2,-1.4641928312728838,Ruminococcaceae
+Caproiciproducens 2,M&R CMV seropositive,3,1.0554081835714741,Ruminococcaceae
+Caproiciproducens 2,M&R Higher BMI (Prevotella),2,-1.1184237593557136,Ruminococcaceae
+HQ716403_g 2,M&R Upregulated metabolic sets,2,-1.0414509341275076,Christensenellaceae
+HQ716403_g 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,1.2107591197378205,Christensenellaceae
+Oscillibacter 10,M&R Upregulated metabolic sets,2,-1.272516530277225,Ruminococcaceae
+Oscillibacter 10,M&R Ruminococcaceae & Christensenellaceae - driven,2,1.0873286400528435,Ruminococcaceae
+Oscillibacter 10,M&R CMV seropositive,2,-0.5191680464649182,Ruminococcaceae
+Bacteroides 5,M&R Higher BMI (Prevotella),2,-0.5502299276524248,Bacteroidaceae
+Anaerofilum 1,M&R Higher BMI (Prevotella),3,-0.8586470663855116,Ruminococcaceae
+Sporobacter 7,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.5344641145209503,Ruminococcaceae
+Sporobacter 7,M&R CMV seropositive,2,-0.6647135476969722,Ruminococcaceae
+DQ057459_g 2,M&R Upregulated metabolic sets,2,-1.3052694908946114,Lachnospiraceae
+Murimonas 2,M&R Upregulated metabolic sets,3,-0.4563294413463642,Lachnospiraceae
+Ruminococcus 6,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.8241102303503128,Ruminococcaceae
+Parasutterella 1,M&R Upregulated metabolic sets,4,0.7492505959098563,Sutterellaceae
+Parasutterella 1,M&R Higher BMI (Prevotella),3,-0.7517662362554777,Sutterellaceae
+HQ716403_g 3,M&R Upregulated metabolic sets,3,-0.8272099586034697,Christensenellaceae
+HQ716403_g 3,M&R Ruminococcaceae & Christensenellaceae - driven,4,1.0517213999938275,Christensenellaceae
+HQ716403_g 3,M&R CMV seropositive,2,-0.9071332029580362,Christensenellaceae
+HQ716403_g 3,M&R Higher BMI (Prevotella),2,-0.8402132561471629,Christensenellaceae
+JN713389_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,1.1377417273262391,Ruminococcaceae
+JN713389_g 1,M&R Higher BMI (Prevotella),2,-1.177010795299907,Ruminococcaceae
+FJ367735_g 1,M&R Upregulated metabolic sets,2,-0.6117953764207168,FJ367735_f
+FJ367735_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.6011338962804526,FJ367735_f
+FJ367735_g 1,M&R Higher BMI (Prevotella),3,-1.750776948887115,FJ367735_f
+Alistipes 11,M&R Upregulated metabolic sets,2,-0.5210446831219202,Rikenellaceae
+HM124244_g 1,M&R Upregulated metabolic sets,2,-0.5051570334389061,Christensenellaceae
+HM124244_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.6607301466892456,Christensenellaceae
+HM124244_g 1,M&R CMV seropositive,2,-1.117260261736605,Christensenellaceae
+Clostridium_g24 4,M&R Upregulated metabolic sets,4,1.3020625949001645,Lachnospiraceae
+Clostridium_g24 4,M&R Ruminococcaceae & Christensenellaceae - driven,3,-1.2767539657332863,Lachnospiraceae
+Clostridium_g24 4,M&R Higher BMI (Prevotella),2,-1.005809961302107,Lachnospiraceae
+Parabacteroides 1,M&R Upregulated metabolic sets,2,0.6599235756757872,Porphyromonadaceae
+Parabacteroides 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.4181921688904631,Porphyromonadaceae
+Parabacteroides 1,M&R Higher BMI (Prevotella),2,-0.691673719583801,Porphyromonadaceae
+Bacteroides 31,M&R Upregulated metabolic sets,2,1.4059570402590658,Bacteroidaceae
+Bacteroides 31,M&R Higher BMI (Prevotella),2,-1.124117169249013,Bacteroidaceae
+Turicibacter 2,M&R CMV seropositive,2,-0.8462500211053143,Erysipelotrichaceae
+KE159538_g 3,M&R Upregulated metabolic sets,2,-1.2897198395828142,Lachnospiraceae
+KE159538_g 3,M&R Higher BMI (Prevotella),2,-0.6151779953787011,Lachnospiraceae
+FJ440089_g 1,M&R Upregulated metabolic sets,2,-1.245277640930385,Prevotellaceae
+FJ440089_g 1,M&R CMV seropositive,3,-1.3898526743813187,Prevotellaceae
+Prevotella 5,M&R Upregulated metabolic sets,2,-2.0623518130581893,Prevotellaceae
+Prevotella 5,M&R CMV seropositive,2,-2.395613982985184,Prevotellaceae
+Prevotella 5,M&R Higher BMI (Prevotella),2,0.9410874865283636,Prevotellaceae
+Bacteroides 34,M&R Upregulated metabolic sets,3,0.9860313607709993,Bacteroidaceae
+Bacteroides 34,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.9017062928185542,Bacteroidaceae
+Bacteroides 34,M&R Higher BMI (Prevotella),2,-1.1752307601128227,Bacteroidaceae
+Eubacterium_g17 2,M&R Upregulated metabolic sets,3,-1.5624093910025734,Lachnospiraceae
+Blautia 5,M&R Upregulated metabolic sets,4,1.225203639557745,Lachnospiraceae
+Blautia 5,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.8634867979737427,Lachnospiraceae
+Blautia 5,M&R Higher BMI (Prevotella),2,-0.7826309938211172,Lachnospiraceae
+KE159538_g 4,M&R Upregulated metabolic sets,3,-0.4790922612924491,Lachnospiraceae
+JN713389_g 2,M&R Upregulated metabolic sets,2,-0.9353042158589522,Ruminococcaceae
+JN713389_g 2,M&R Higher BMI (Prevotella),2,-0.6688758569112804,Ruminococcaceae
+Oscillibacter 12,M&R Higher BMI (Prevotella),2,-0.42380944602323634,Ruminococcaceae
+EU464362_g 1,M&R Upregulated metabolic sets,3,-1.0023305603610904,EU464362_f
+EU464362_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,1.1766025611912099,EU464362_f
+EU464362_g 1,M&R CMV seropositive,2,-0.6523914306161918,EU464362_f
+Alistipes 12,M&R Higher BMI (Prevotella),2,-0.5823381803978094,Rikenellaceae
+FR888536_g 3,M&R Upregulated metabolic sets,3,-1.179481802302018,FR888536_f
+Pseudoflavonifractor 4,M&R Upregulated metabolic sets,3,-0.6543859327824318,Ruminococcaceae
+Pseudoflavonifractor 4,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.737529611000469,Ruminococcaceae
+Pseudoflavonifractor 4,M&R Higher BMI (Prevotella),3,-0.5738029308055933,Ruminococcaceae
+Clostridium_g24 5,M&R Upregulated metabolic sets,4,1.569166832411607,Lachnospiraceae
+Clostridium_g24 5,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.9828163353483341,Lachnospiraceae
+Clostridium_g24 5,M&R CMV seropositive,2,-0.6289923796343978,Lachnospiraceae
+Clostridium_g24 5,M&R Higher BMI (Prevotella),2,-1.0960130365060339,Lachnospiraceae
+DQ815907_g 1,M&R Upregulated metabolic sets,2,-0.8815985045968963,Desulfovibrionaceae
+AB009176_g 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.8279541509030062,Ruminococcaceae
+AB009176_g 2,M&R Higher BMI (Prevotella),3,-1.194437558372628,Ruminococcaceae
+Lachnospiraceae 3,M&R Upregulated metabolic sets,3,-0.853255419817371,Lachnospiraceae
+Oxalobacter 1,M&R Upregulated metabolic sets,3,-0.6765504536763355,Oxalobacteraceae
+Oxalobacter 1,M&R Ruminococcaceae & Christensenellaceae - driven,4,0.6420527882875938,Oxalobacteraceae
+AM277970_g 1,M&R Upregulated metabolic sets,3,-1.4252993831212386,Coriobacteriaceae
+Eubacterium_g17 3,M&R Upregulated metabolic sets,3,-0.670978048130861,Lachnospiraceae
+Eubacterium_g17 3,M&R Higher BMI (Prevotella),3,-1.0219909324330356,Lachnospiraceae
+Oscillibacter 14,M&R Upregulated metabolic sets,3,-1.3542818242341557,Ruminococcaceae
+JN713389_g 5,M&R Upregulated metabolic sets,2,-0.6643535662092604,Ruminococcaceae
+JN713389_g 5,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.8849291266352153,Ruminococcaceae
+JN713389_g 5,M&R Higher BMI (Prevotella),2,-0.5256457203751739,Ruminococcaceae
+AJ518873_g 1,M&R CMV seropositive,2,0.48691223614860923,Lachnospiraceae
+Bacteroides 9,M&R Upregulated metabolic sets,2,-1.8034240005004625,Bacteroidaceae
+Sporobacter 8,M&R Upregulated metabolic sets,2,-1.1012792814174788,Ruminococcaceae
+Sporobacter 8,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.6756944748373341,Ruminococcaceae
+Sporobacter 8,M&R CMV seropositive,2,-0.987606046828914,Ruminococcaceae
+Veillonella 2,M&R Upregulated metabolic sets,2,-0.41142544384251944,Veillonellaceae
+Veillonella 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5456617373940273,Veillonellaceae
+Veillonella 2,M&R CMV seropositive,2,-0.43065550488590687,Veillonellaceae
+Pseudoflavonifractor 5,M&R Ruminococcaceae & Christensenellaceae - driven,3,-0.969131400849812,Ruminococcaceae
+Pseudoflavonifractor 5,M&R Higher BMI (Prevotella),2,-0.6440837760441497,Ruminococcaceae
+Eubacterium_g23 5,M&R Ruminococcaceae & Christensenellaceae - driven,2,-1.5015435102620598,Ruminococcaceae
+Eubacterium_g23 5,M&R CMV seropositive,2,0.5432007013029219,Ruminococcaceae
+JN713389_g 6,M&R Upregulated metabolic sets,3,-1.1723705606234425,Ruminococcaceae
+Caproiciproducens 3,M&R Upregulated metabolic sets,2,0.4889560225987672,Ruminococcaceae
+Oscillibacter 1,M&R Higher BMI (Prevotella),2,-0.46729880381795563,Ruminococcaceae
+LLKB_g 4,M&R Upregulated metabolic sets,2,-0.5578473366524257,Lachnospiraceae
+LLKB_g 4,M&R CMV seropositive,2,0.6531990200351486,Lachnospiraceae
+Sporobacter 11,M&R Upregulated metabolic sets,3,-1.1132395251446627,Ruminococcaceae
+Sporobacter 11,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.990127744114542,Ruminococcaceae
+Sporobacter 11,M&R CMV seropositive,2,-0.7811729039674745,Ruminococcaceae
+Sporobacter 11,M&R Higher BMI (Prevotella),2,-0.502178267013338,Ruminococcaceae
+Romboutsia 2,M&R CMV seropositive,3,-1.1182516875043056,Peptostreptococcaceae
+EF406589_g 1,M&R Upregulated metabolic sets,2,-0.40761411204597064,Lachnospiraceae
+DQ815907_g 2,M&R Higher BMI (Prevotella),2,-0.7790913189992251,Desulfovibrionaceae
+Clostridium_g7 2,M&R Upregulated metabolic sets,2,0.6352244699274199,Lachnospiraceae
+Clostridium_g7 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,-1.0833349618063308,Lachnospiraceae
+Clostridium_g7 2,M&R CMV seropositive,2,-0.5242417405800499,Lachnospiraceae
+Caproiciproducens 4,M&R CMV seropositive,2,0.5159246606093266,Ruminococcaceae
+Sporobacter 10,M&R Upregulated metabolic sets,2,-0.547529569664401,Ruminococcaceae
+Sporobacter 10,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.4384999995682719,Ruminococcaceae
+Sporobacter 10,M&R Higher BMI (Prevotella),2,-0.6231501922784126,Ruminococcaceae
+Streptococcus 3,M&R Upregulated metabolic sets,2,0.46354165869837843,Streptococcaceae
+Sporobacter 1,M&R Upregulated metabolic sets,3,-0.9820885956198753,Ruminococcaceae
+EF404788_g 1,M&R Higher BMI (Prevotella),3,-0.956092122882061,Ruminococcaceae
+Bacteroidetes 1,M&R Upregulated metabolic sets,3,-1.1878341290913825,
+Bacteroidetes 1,M&R Ruminococcaceae & Christensenellaceae - driven,4,1.037313063599916,
+Bacteroidetes 1,M&R CMV seropositive,2,-0.70601945138242,
+Bacteroidetes 1,M&R Higher BMI (Prevotella),2,-1.068002903689204,
+Sporobacter 12,M&R Upregulated metabolic sets,2,-0.4166374806622433,Ruminococcaceae
+Sporobacter 12,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5949446934489888,Ruminococcaceae
+Sporobacter 12,M&R Higher BMI (Prevotella),2,-0.7547185813813843,Ruminococcaceae
+AB185535_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5229575681584234,AB185535_f
+AB185535_g 1,M&R Higher BMI (Prevotella),3,-0.8956974911703655,AB185535_f
+Pseudoflavonifractor 6,M&R Upregulated metabolic sets,2,-1.0548732104539986,Ruminococcaceae
+Pseudoflavonifractor 6,M&R CMV seropositive,2,0.7027297944877108,Ruminococcaceae
+Pseudoflavonifractor 6,M&R Higher BMI (Prevotella),2,-0.4896475725747362,Ruminococcaceae
+Prevotella 6,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.9595883726456824,Prevotellaceae
+Prevotella 6,M&R CMV seropositive,2,-2.587175721486081,Prevotellaceae
+Prevotella 6,M&R Higher BMI (Prevotella),2,1.7495405375731867,Prevotellaceae
+AB239481_g 6,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.41293179269146835,Christensenellaceae
+AB239481_g 6,M&R Higher BMI (Prevotella),2,-0.5230866114820935,Christensenellaceae
+Sporobacter 9,M&R Upregulated metabolic sets,2,-0.8723294039958006,Ruminococcaceae
+Sporobacter 9,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5841195120903271,Ruminococcaceae
+Sporobacter 9,M&R Higher BMI (Prevotella),2,-0.7332584339052235,Ruminococcaceae
+Roseburia 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.5246172065742265,Lachnospiraceae
+AM277063_g 1,M&R Upregulated metabolic sets,3,-0.6520249443346317,Coriobacteriaceae
+AM277063_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.42153785102980873,Coriobacteriaceae
+Subdoligranulum 5,M&R Upregulated metabolic sets,2,-1.034561254917691,Ruminococcaceae
+Alistipes 13,M&R Upregulated metabolic sets,2,-0.8029073452269253,Rikenellaceae
+Alistipes 13,M&R Ruminococcaceae & Christensenellaceae - driven,4,1.279628037144145,Rikenellaceae
+Alistipes 13,M&R CMV seropositive,3,-1.2861346397198137,Rikenellaceae
+Alistipes 13,M&R Higher BMI (Prevotella),3,-1.1995617287763887,Rikenellaceae
+Alistipes 14,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5310557056782078,Rikenellaceae
+Alistipes 14,M&R Higher BMI (Prevotella),2,-0.6002723732320282,Rikenellaceae
+AB239481_g 4,M&R Upregulated metabolic sets,2,-0.5881982373373035,Christensenellaceae
+AB239481_g 4,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.4848832947251631,Christensenellaceae
+AB239481_g 4,M&R Higher BMI (Prevotella),2,-0.5915051679243825,Christensenellaceae
+Oscillibacter 15,M&R Upregulated metabolic sets,3,-1.0472913643401758,Ruminococcaceae
+Oscillibacter 15,M&R Ruminococcaceae & Christensenellaceae - driven,4,1.1872981667347793,Ruminococcaceae
+Oscillibacter 15,M&R CMV seropositive,2,-0.8099990501474351,Ruminococcaceae
+Oscillibacter 15,M&R Higher BMI (Prevotella),3,-1.2775902588393542,Ruminococcaceae
+Lactobacillus 1,M&R Upregulated metabolic sets,2,0.6948586224310652,Lactobacillaceae
+Lactobacillus 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.3154146613672261,Lactobacillaceae
+Lactobacillus 1,M&R CMV seropositive,2,-0.4617737046454502,Lactobacillaceae
+Phascolarctobacterium 2,M&R Upregulated metabolic sets,2,-2.7531830026698443,Acidaminococcaceae
+Sporobacter 14,M&R Upregulated metabolic sets,3,-0.4280351400149959,Ruminococcaceae
+JN713389_g 8,M&R Upregulated metabolic sets,3,-0.9143543852978252,Ruminococcaceae
+Bacteroides 50,M&R Upregulated metabolic sets,2,-0.3867995833843142,Bacteroidaceae
+Sporobacter 13,M&R Upregulated metabolic sets,2,-0.7142071455983566,Ruminococcaceae
+Sporobacter 13,M&R Higher BMI (Prevotella),2,-0.5315159181274305,Ruminococcaceae
+Parabacteroides 3,M&R Higher BMI (Prevotella),2,-0.8370567659491996,Porphyromonadaceae
+Bacteroides 8,M&R Upregulated metabolic sets,3,0.6111264299619208,Bacteroidaceae
+Bacteroides 8,M&R Higher BMI (Prevotella),2,-0.6226313402968321,Bacteroidaceae
+Eubacterium_g4 2,M&R Higher BMI (Prevotella),3,-0.8573164905693061,Lachnospiraceae
+HM124260_g 1,M&R Upregulated metabolic sets,2,-0.4516767624045958,Christensenellaceae
+HM124260_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,3,1.0230764778923804,Christensenellaceae
+HM124260_g 1,M&R Higher BMI (Prevotella),3,-0.6484583062750964,Christensenellaceae
+Blautia 1,M&R Upregulated metabolic sets,2,0.41144902385727217,Lachnospiraceae
+Blautia 1,M&R Ruminococcaceae & Christensenellaceae - driven,4,-0.5358070611491123,Lachnospiraceae
+AB239481_g 7,M&R Upregulated metabolic sets,3,-0.9162629333818472,Christensenellaceae
+AB239481_g 7,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.751588139502868,Christensenellaceae
+AB239481_g 7,M&R Higher BMI (Prevotella),2,-0.6209792833238924,Christensenellaceae
+Pseudoflavonifractor 9,M&R CMV seropositive,2,0.38520698420792837,Ruminococcaceae
+Pseudoflavonifractor 9,M&R Higher BMI (Prevotella),2,-0.6048447137539752,Ruminococcaceae
+FJ848448_g 1,M&R Upregulated metabolic sets,3,-0.7348462603972783,Christensenellaceae
+Veillonella 3,M&R CMV seropositive,3,-0.831420820926408,Veillonellaceae
+AB009176_g 8,M&R Upregulated metabolic sets,3,-0.8843791541821094,Ruminococcaceae
+AB009176_g 8,M&R Ruminococcaceae & Christensenellaceae - driven,2,1.0034774005687854,Ruminococcaceae
+AB009176_g 8,M&R Higher BMI (Prevotella),2,-0.4635390939066721,Ruminococcaceae
+Marvinbryantia 1,M&R Upregulated metabolic sets,2,-0.5244887578174334,Lachnospiraceae
+Marvinbryantia 1,M&R Higher BMI (Prevotella),2,-0.6328988581118922,Lachnospiraceae
+Lactococcus 1,M&R Upregulated metabolic sets,2,0.42166937953484346,Streptococcaceae
+Lactococcus 1,M&R Higher BMI (Prevotella),2,-0.4459082747919138,Streptococcaceae
+Sellimonas 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.7837575486664691,Lachnospiraceae
+Sellimonas 1,M&R CMV seropositive,2,0.4830834189806077,Lachnospiraceae
+Sellimonas 1,M&R Higher BMI (Prevotella),2,-0.6667195134378756,Lachnospiraceae
+Bacteroides 11,M&R Upregulated metabolic sets,2,0.344654823661824,Bacteroidaceae
+Oscillibacter 18,M&R Upregulated metabolic sets,2,0.5574191045917867,Ruminococcaceae
+Oscillibacter 18,M&R Ruminococcaceae & Christensenellaceae - driven,3,-0.4479852969386715,Ruminococcaceae
+Oscillibacter 18,M&R Higher BMI (Prevotella),2,-0.6691333989944585,Ruminococcaceae
+Victivallis 2,M&R Upregulated metabolic sets,2,-0.3677714734094297,Victivallaceae
+Victivallis 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.8337673151908793,Victivallaceae
+AB239481_g 8,M&R Upregulated metabolic sets,3,-0.5574578194942325,Christensenellaceae
+AB239481_g 8,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.4370482911179857,Christensenellaceae
+AB239481_g 8,M&R Higher BMI (Prevotella),3,-0.39978047262591754,Christensenellaceae
+Murimonas 4,M&R Upregulated metabolic sets,3,-0.5191162098410814,Lachnospiraceae
+Murimonas 4,M&R CMV seropositive,3,-0.5824657909762687,Lachnospiraceae
+Eubacterium_g23 8,M&R Upregulated metabolic sets,2,-0.4873836132902823,Ruminococcaceae
+Eubacterium_g23 8,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.8978228046626213,Ruminococcaceae
+Eubacterium_g23 8,M&R CMV seropositive,2,-0.7564786215947504,Ruminococcaceae
+HM124260_g 2,M&R Upregulated metabolic sets,2,-0.3798644639308833,Christensenellaceae
+HM124260_g 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.9100699575634845,Christensenellaceae
+HM124260_g 2,M&R Higher BMI (Prevotella),2,-0.8209337248051998,Christensenellaceae
+Clostridium_g24 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.3920761254176605,Lachnospiraceae
+Turicibacter 1,M&R Higher BMI (Prevotella),2,-0.8549525578437358,Erysipelotrichaceae
+Sporobacter 17,M&R Upregulated metabolic sets,2,-0.5773981455629147,Ruminococcaceae
+Sporobacter 17,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.6811704340842339,Ruminococcaceae
+Sporobacter 17,M&R Higher BMI (Prevotella),2,-0.4627113491379296,Ruminococcaceae
+Oscillibacter 19,M&R Higher BMI (Prevotella),2,-0.3679290027245526,Ruminococcaceae
+Pseudoflavonifractor 12,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5053487513185646,Ruminococcaceae
+Pseudoflavonifractor 12,M&R CMV seropositive,2,-0.3808388147014648,Ruminococcaceae
+AY442821_g 1,M&R CMV seropositive,2,-0.4851214748992274,Christensenellaceae
+Mogibacterium 1,M&R Upregulated metabolic sets,2,0.4446256807629752,Mogibacterium_f
+Mogibacterium 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.4653977808268585,Mogibacterium_f
+Mogibacterium 1,M&R CMV seropositive,2,-0.7471556283094394,Mogibacterium_f
+GU302849_g 1,M&R Upregulated metabolic sets,3,-1.0865840373978004,Christensenellaceae
+GU302849_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.7102869046964093,Christensenellaceae
+GU302849_g 1,M&R Higher BMI (Prevotella),2,-0.6374997418491148,Christensenellaceae
+Howardella 1,M&R Upregulated metabolic sets,3,-0.7615611689946725,Lachnospiraceae
+Howardella 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.4777683661103818,Lachnospiraceae
+Howardella 1,M&R CMV seropositive,3,-0.6667692130448416,Lachnospiraceae
+Bacteroides 10,M&R Ruminococcaceae & Christensenellaceae - driven,2,-1.1289986256713083,Bacteroidaceae
+Bacteroides 10,M&R Higher BMI (Prevotella),2,0.8181087078023099,Bacteroidaceae
+HM124260_g 3,M&R Upregulated metabolic sets,2,-0.71652990951874,Christensenellaceae
+Sporobacter 19,M&R Upregulated metabolic sets,2,-0.6964387244828685,Ruminococcaceae
+Sporobacter 19,M&R CMV seropositive,2,0.7425024030321253,Ruminococcaceae
+Sporobacter 19,M&R Higher BMI (Prevotella),2,-0.6140914086545344,Ruminococcaceae
+AM277063_g 2,M&R Upregulated metabolic sets,2,-0.6013250081815859,Coriobacteriaceae
+AM277063_g 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.39719328497604606,Coriobacteriaceae
+AM277063_g 2,M&R CMV seropositive,3,0.9702805807230822,Coriobacteriaceae
+AM277063_g 2,M&R Higher BMI (Prevotella),2,-0.38135988595361203,Coriobacteriaceae
+AM500802_g 1,M&R Higher BMI (Prevotella),3,-0.6826286912091475,Mogibacterium_f
+Oscillibacter 2,M&R Upregulated metabolic sets,2,-0.5615581046715217,Ruminococcaceae
+Oscillibacter 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5160628738017242,Ruminococcaceae
+Eubacterium_g4 3,M&R Upregulated metabolic sets,2,0.6559792322689101,Lachnospiraceae
+Eubacterium_g4 3,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.507574350681264,Lachnospiraceae
+Eubacterium_g4 3,M&R Higher BMI (Prevotella),2,-0.3466353821795611,Lachnospiraceae
+Coprococcus_g1 2,M&R Higher BMI (Prevotella),2,-0.8112519947822002,Lachnospiraceae
+EU842423_g 2,M&R Upregulated metabolic sets,3,-0.9427061084638946,Lachnospiraceae
+EU842423_g 2,M&R CMV seropositive,2,0.5985444266576617,Lachnospiraceae
+EU842423_g 2,M&R Higher BMI (Prevotella),2,-0.552055513674052,Lachnospiraceae
+Sporobacter 2,M&R Upregulated metabolic sets,2,-0.42604287484368797,Ruminococcaceae
+Sporobacter 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.49841923312051434,Ruminococcaceae
+Sporobacter 2,M&R Higher BMI (Prevotella),2,-0.6992464174267166,Ruminococcaceae
+Oscillibacter 21,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.3936662698871411,Ruminococcaceae
+Oscillibacter 21,M&R CMV seropositive,2,0.6861449217466407,Ruminococcaceae
+Pseudoflavonifractor 13,M&R Higher BMI (Prevotella),2,-0.465900271925253,Ruminococcaceae
+EU381776_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.5101402160005237,Mogibacterium_f
+Oscillibacter 3,M&R Upregulated metabolic sets,2,-0.6280659592868376,Ruminococcaceae
+Oscillibacter 3,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.4936051029674622,Ruminococcaceae
+Oscillibacter 3,M&R Higher BMI (Prevotella),2,-0.5986648288503771,Ruminococcaceae
+Clostridium_g23 1,M&R Upregulated metabolic sets,4,0.8055171968173102,Lachnospiraceae
+Clostridium_g23 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.7057167236220999,Lachnospiraceae
+AB239481_g 10,M&R Upregulated metabolic sets,2,-0.6408245283494397,Christensenellaceae
+AB239481_g 10,M&R Ruminococcaceae & Christensenellaceae - driven,3,1.002196917111436,Christensenellaceae
+AB239481_g 10,M&R Higher BMI (Prevotella),2,-0.9253352176591833,Christensenellaceae
+EF400272_g 1,M&R Upregulated metabolic sets,2,-0.45776170971788466,Ruminococcaceae
+EF400272_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5157396480140791,Ruminococcaceae
+EF400272_g 1,M&R Higher BMI (Prevotella),2,-0.5364414982161391,Ruminococcaceae
+Oscillibacter 22,M&R Higher BMI (Prevotella),2,-0.40985881748715997,Ruminococcaceae
+AB009176_g 16,M&R Upregulated metabolic sets,3,-0.6251685432493939,Ruminococcaceae
+AB009176_g 16,M&R Ruminococcaceae & Christensenellaceae - driven,4,0.7689053411877806,Ruminococcaceae
+AB009176_g 16,M&R CMV seropositive,2,-0.5342337357297536,Ruminococcaceae
+AB009176_g 16,M&R Higher BMI (Prevotella),2,-0.43311933012454756,Ruminococcaceae
+Butyricimonas 5,M&R Higher BMI (Prevotella),2,-0.5294717951435621,Odoribacteraceae
+Slackia 1,M&R CMV seropositive,3,-0.40383392886237396,Coriobacteriaceae
+Coprobacter 4,M&R CMV seropositive,3,0.38209453825979195,Porphyromonadaceae
+Phascolarctobacterium 3,M&R Higher BMI (Prevotella),2,-1.579765820356748,Acidaminococcaceae
+AY442821_g 2,M&R Upregulated metabolic sets,2,-0.6772859134451393,Christensenellaceae
+HM124260_g 4,M&R Upregulated metabolic sets,2,-0.5371853222435846,Christensenellaceae
+HM124260_g 4,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.5738349714981746,Christensenellaceae
+HM124260_g 4,M&R Higher BMI (Prevotella),2,-0.6850536376516231,Christensenellaceae
+Eubacterium_g5 1,M&R Upregulated metabolic sets,2,0.35856839075058294,Lachnospiraceae
+Acidaminococcus 1,M&R Upregulated metabolic sets,2,-1.5206022701194,Acidaminococcaceae
+Acidaminococcus 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.7331036995291151,Acidaminococcaceae
+Acidaminococcus 1,M&R CMV seropositive,2,-0.4793091622841035,Acidaminococcaceae
+Lachnospiraceae 9,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.5158704873408155,Lachnospiraceae
+Lachnospiraceae 9,M&R CMV seropositive,2,0.6157159814194255,Lachnospiraceae
+Lachnospiraceae 7,M&R Upregulated metabolic sets,2,-0.6182674585493179,Lachnospiraceae
+Clostridium 2,M&R Upregulated metabolic sets,2,-0.9502848737811664,Clostridiaceae
+Clostridium 2,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.7505425918357524,Clostridiaceae
+Pseudoflavonifractor 15,M&R CMV seropositive,2,0.4024951154546757,Ruminococcaceae
+Pseudoflavonifractor 15,M&R Higher BMI (Prevotella),2,-0.3829964820058732,Ruminococcaceae
+EU844456_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.3809759074334485,Mogibacterium_f
+EU844456_g 1,M&R Higher BMI (Prevotella),3,-0.6813765612685667,Mogibacterium_f
+Sporobacter 20,M&R Upregulated metabolic sets,3,-0.5760949493379008,Ruminococcaceae
+Sporobacter 20,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.5235774888428443,Ruminococcaceae
+Bacteroides 2,M&R Upregulated metabolic sets,3,0.6204834647649735,Bacteroidaceae
+HM124151_g 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5043507664593713,Christensenellaceae
+HM124151_g 2,M&R Higher BMI (Prevotella),2,-0.8235158366299825,Christensenellaceae
+Parabacteroides 4,M&R Upregulated metabolic sets,2,0.3915361019672289,Porphyromonadaceae
+Parabacteroides 4,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.35528956705840087,Porphyromonadaceae
+Blautia 19,M&R Higher BMI (Prevotella),2,-0.6277676722740909,Lachnospiraceae
+Bacteroides 62,M&R CMV seropositive,2,-0.5405811494391091,Bacteroidaceae
+Bacteroides 62,M&R Higher BMI (Prevotella),3,0.6418342658960746,Bacteroidaceae
+HQ452860_g 1,M&R Upregulated metabolic sets,3,-0.7999148733913642,Erysipelotrichaceae
+HQ452860_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.6201128971021627,Erysipelotrichaceae
+HQ452860_g 1,M&R Higher BMI (Prevotella),3,-0.588788649629305,Erysipelotrichaceae
+HM124260_g 6,M&R Upregulated metabolic sets,2,-0.4774855516737182,Christensenellaceae
+HM124260_g 6,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.45446356538391214,Christensenellaceae
+Ruminococcus_g2 2,M&R Higher BMI (Prevotella),2,-2.1804869693333186,Ruminococcaceae
+Eisenbergiella 1,M&R CMV seropositive,3,0.6567659412952951,Lachnospiraceae
+Sutterella 2,M&R Upregulated metabolic sets,3,-2.7940872971495145,Sutterellaceae
+Actinomyces 1,M&R Upregulated metabolic sets,2,0.4846541708758145,Actinomycetaceae
+Clostridium_g24 2,M&R Upregulated metabolic sets,2,0.5019036143613879,Lachnospiraceae
+EU622770_g 1,M&R Upregulated metabolic sets,2,0.7160010699435384,Peptococcaceae
+EU622770_g 1,M&R CMV seropositive,2,-0.38428073188227063,Peptococcaceae
+Oscillibacter 4,M&R Higher BMI (Prevotella),2,-0.4718456064456527,Ruminococcaceae
+Intestinibacter 1,M&R CMV seropositive,2,-0.6547284426025588,Peptostreptococcaceae
+AB009176_g 20,M&R Upregulated metabolic sets,2,-0.5564280855962703,Ruminococcaceae
+AB009176_g 20,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.7648064020229214,Ruminococcaceae
+AB009176_g 20,M&R CMV seropositive,2,-0.4475104866670502,Ruminococcaceae
+Alistipes 2,M&R Higher BMI (Prevotella),3,-1.0368389892731968,Rikenellaceae
+Lachnospiraceae 16,M&R Higher BMI (Prevotella),2,-0.5715730252579261,Lachnospiraceae
+AB009176_g 22,M&R Upregulated metabolic sets,3,-0.6532698364918309,Ruminococcaceae
+AB009176_g 22,M&R CMV seropositive,2,-0.42118745366793714,Ruminococcaceae
+GU302849_g 3,M&R Upregulated metabolic sets,2,-0.25675971786631724,Christensenellaceae
+GU302849_g 3,M&R Ruminococcaceae & Christensenellaceae - driven,3,0.6888325411662904,Christensenellaceae
+GU302849_g 3,M&R Higher BMI (Prevotella),3,-0.4975284492196225,Christensenellaceae
+EF602946_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.3487463133454965,Ruminococcaceae
+EF602946_g 1,M&R Higher BMI (Prevotella),2,-0.41536390562372566,Ruminococcaceae
+AB606260_g 1,M&R Upregulated metabolic sets,2,-0.3340167491895989,Hydrogenispora_f
+AB606260_g 1,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.4754004636868443,Hydrogenispora_f
+AB606260_g 1,M&R CMV seropositive,2,-0.42472529117156105,Hydrogenispora_f
+Faecalibacterium 5,M&R Upregulated metabolic sets,2,0.6819118361341716,Ruminococcaceae
+Faecalibacterium 5,M&R CMV seropositive,2,-1.0049493193778054,Ruminococcaceae
+EF401862_g 1,M&R CMV seropositive,2,-0.35390565969445975,Christensenellaceae
+EF401862_g 1,M&R Higher BMI (Prevotella),2,0.2927396357238598,Christensenellaceae
+EF402988_g 1,M&R Upregulated metabolic sets,2,0.6459752025652373,Lachnospiraceae
+EF402988_g 1,M&R Higher BMI (Prevotella),2,-0.586426539169033,Lachnospiraceae
+GU302849_g 4,M&R Upregulated metabolic sets,2,-0.4325832298356262,Christensenellaceae
+GU302849_g 4,M&R Ruminococcaceae & Christensenellaceae - driven,4,0.6398309141909788,Christensenellaceae
+GU302849_g 4,M&R Higher BMI (Prevotella),2,-0.3033220173346162,Christensenellaceae
+Alloprevotella 1,M&R Upregulated metabolic sets,3,-1.8275335474614587,Prevotellaceae
+Alloprevotella 1,M&R Higher BMI (Prevotella),2,0.6657268363459914,Prevotellaceae
+Bacteroides 13,M&R Higher BMI (Prevotella),2,-0.8430299161130131,Bacteroidaceae
+Pseudoflavonifractor 19,M&R Upregulated metabolic sets,2,-0.555977356408812,Ruminococcaceae
+Pseudoflavonifractor 19,M&R Higher BMI (Prevotella),2,-0.3467315740833158,Ruminococcaceae
+Caproiciproducens 7,M&R Upregulated metabolic sets,2,-0.4070603067934562,Ruminococcaceae
+Caproiciproducens 7,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.36378885146813433,Ruminococcaceae
+Ruminococcus_g4 3,M&R Higher BMI (Prevotella),2,-0.6334575482399634,Lachnospiraceae
+Bacteroides 17,M&R Upregulated metabolic sets,2,0.597164972898127,Bacteroidaceae
+Bacteroides 17,M&R Higher BMI (Prevotella),3,-1.6825864386405005,Bacteroidaceae
+Caproiciproducens 6,M&R Ruminococcaceae & Christensenellaceae - driven,2,0.5749034508844222,Ruminococcaceae
+Caproiciproducens 6,M&R Higher BMI (Prevotella),2,-0.5151496775516697,Ruminococcaceae
+EF400272_g 2,M&R Upregulated metabolic sets,2,0.38846904359888845,Ruminococcaceae
+EF400272_g 2,M&R Ruminococcaceae & Christensenellaceae - driven,2,-0.3252151716810521,Ruminococcaceae
+EF602946_g 2,M&R Higher BMI (Prevotella),2,-0.3059336876102337,Ruminococcaceae
+Eubacterium_g23 1,M&R CMV seropositive,2,-1.1246269512270173,Ruminococcaceae
+Eggerthella 1,M&R Higher BMI (Prevotella),2,-0.47237344438312706,Coriobacteriaceae
+Lachnospiraceae 20,M&R CMV seropositive,2,0.35735653119562494,Lachnospiraceae

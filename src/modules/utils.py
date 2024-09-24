@@ -689,7 +689,7 @@ def plot_heatmaps_gsea_bacteria(res, micro_data, clus_labels, micro_taxa, res_di
         rel_counts.columns = taxa_list
         
         for family in res:
-                print(family)
+            
                 rel_counts['labels'] = clus_labels.copy()
                 rel_counts['labels'] = np.where(rel_counts['labels'] != family['target'], 'C Else', family['target'])
 

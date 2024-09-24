@@ -19,20 +19,16 @@ ipython_config.py
 
 # Environments
 env/
+activ_env/
 
 # Directories
 manuscript/
-results/
 presentations/
 graph_files/
 test_files/
 docs/
-lib/
 
 # R files
 *.RData
 *.Rhistory
 *.Rproj
-
-
-.gitignore
