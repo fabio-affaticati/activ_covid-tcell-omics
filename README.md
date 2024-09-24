@@ -20,10 +20,10 @@ marker.
 
 
 
-## 2. - Dependencies:
+## 2. Dependencies:
 
 
-### 2.1 - Python dependencies
+### 2.1 Python dependencies:
 **Python Version:** 3.11.9
 
 Data manipulation:
@@ -57,7 +57,7 @@ Misc:
 - snfpy==0.2.2
 
 
-### 2.2 - R dependencies
+### 2.2 R dependencies:
 **R Version:** 4.3.3
 Data manipulation:
 - tidyverse==2.0.0
