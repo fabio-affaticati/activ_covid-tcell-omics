@@ -136,21 +136,24 @@ def tcrseq_loading(tcr_dir):
                 
                 file = filedata[2]
                 description = filedata[0]
-                type = filedata[1]
-
+                types = filedata[1]
+            
                 readdata = TcrData()
                 readdata.read_mixcr(tcr_dir+"/" + run +"/" + file, minFreq = 5)
                 readdata.raw['sample'] = description
+                readdata.raw['type'] = types
                 tcr_raw.append(readdata.raw)
     
-    tcr_raw = pd.concat(tcr_raw, ignore_index=True)          
+    tcr_raw = pd.concat(tcr_raw, ignore_index=True)  
+    # calculate freq as freq / sum of freq per sample
     tcr_raw['freq']/=6
-    tcr_raw = tcr_raw.groupby(['tcrseq', 'sample'], as_index=False).agg({'count': 'sum', 'freq': 'sum', 'cdr3': 'first', 'vgene':'first', 'jgene': 'first'})
+    tcr_raw = tcr_raw.groupby(['tcrseq', 'sample'], as_index=False).agg({'count': 'sum', 'freq': 'sum', 'cdr3': 'first', 'vgene':'first', 'jgene': 'first', 'type': 'first'})
     tcr_raw['sample'] = tcr_raw['sample'].str.replace('_', ' ')
     replacements_subjectnr = {'HH HA':'HHHA', '78 1':'78.1', '78 2': '78.2', 'Covid HH0801':'Covid HHHA031'}
     tcr_raw['sample'].replace(replacements_subjectnr, regex=True, inplace=True)
     tcr_raw = tcr_raw.query(f'sample != "Covid HH053"')
     tcr_raw = tcr_raw.query('vgene.str.startswith("TRB")')
+    #tcr_raw['freq'] = tcr_raw.groupby('sample')['count'].transform(lambda x: x / x.sum())
     tcr_raw['vgene'] += "*01"
     tcr_raw['jgene'] += "*01"
     tcr_raw.reset_index(drop=True,inplace=True)

@@ -248,6 +248,7 @@ def significant_reg(clusters, parameters, pvalues, res_dir):
     for col in pvalues.columns:
         # added multiple testing
         pvalues[col] = multipletests(pvals = pvalues[col], alpha = .05, method = 'bonferroni')[1]
+        print("Pvalues before converting to asterisks but after multiple testing:", pvalues[col])
         pvalues[col] = pvalues[col].apply(convert_pvalue_to_asterisks)
         
     
@@ -568,47 +569,56 @@ def draw_network(network, clus_labels, res_dir):
 
 
 def alpha_diversity_microbiome(abundances, patients, clus_labels, res_dir):
+    shannon_raw = alpha_diversity('shannon', abundances.values, ids=abundances.index)
 
-    shannon = alpha_diversity('shannon', abundances, patients)
-    simpson = alpha_diversity('simpson', abundances, patients)
-    chao1 = alpha_diversity('chao1', abundances, patients)
+    # Scale Shannon by maximum possible entropy ln(N)
+    shannon_norm = shannon_raw / np.log((abundances.astype(bool).sum(axis=1)).values)
+    simpson = alpha_diversity('simpson', abundances.values, ids=abundances.index)
+    chao1 = alpha_diversity('chao1', abundances.values, ids=abundances.index)
+    
+    stat = pd.DataFrame({
+        'Shannon index': shannon_norm,
+        'Simpson index': simpson,
+        'Chao1 richness': chao1,
+        'Cluster': clus_labels
+    })
 
-    stat = pd.DataFrame()
-    stat['Shannon index'] = shannon
-    stat['Simpson index'] = simpson
-    stat['Chao1 richness'] = chao1
-    stat.reset_index(drop = True, inplace=True)
-    stat['Cluster'] = clus_labels
-
-    print(stat)
-
-
-    fig, axes = plt.subplots(1, 3, figsize=(14, 10))
+    fig, axes = plt.subplots(1, 3, figsize=(14, 8))
     
     for i, metric in enumerate(['Shannon index', 'Simpson index', 'Chao1 richness']):
-
         order = list(stat['Cluster'].unique())
+        pairs = list(combinations(order, 2))
 
-        pairs = list(combinations(order,2))
+        # Dunn's test for pairwise comparisons
+        dunn = sp.posthoc_dunn([stat[stat['Cluster'] == uni][metric] for uni in order], p_adjust='bonferroni')
+        dunn_annot = [convert_pvalue_to_asterisks(dunn.iloc[order.index(pair[0]), order.index(pair[1])])
+                      for pair in pairs]
+        dunn_annot = ['ns' if x == '' else x for x in dunn_annot]
 
-        dunn = sp.posthoc_dunn([stat[stat['Cluster'] == uni][metric] for uni in order], p_adjust = 'bonferroni')
+        # Plot swarm + boxplot
+        sns.swarmplot(data=stat, y=metric, x='Cluster', hue='Cluster',
+                      linewidth=.5, size=4, order=order, ax=axes[i])
+        sns.boxplot(data=stat, y=metric, x='Cluster', hue='Cluster',
+                    dodge=False, saturation=0, width=0.5, showfliers=False, order=order, ax=axes[i])
 
-        dunn = [str(convert_pvalue_to_asterisks(dunn.iloc[int(order.index(pair[0])), int(order.index(pair[1]))])) for pair in pairs]
-        dunn = ['ns' if el == '' else el for el in dunn]
-
-        sns.swarmplot(data=stat, y = metric, x = 'Cluster',hue = 'Cluster', linewidth=.5, size=4, order=order, ax=axes[i])
-        sns.boxplot(data=stat, y = metric, x = 'Cluster',hue = 'Cluster', dodge= False, saturation = 0, width=0.5, showfliers=False, order=order, ax=axes[i])
-        plt.tight_layout()
-        axes[i].text(0.02, 0.99, f"Kruskal-Wallis pvalue = {kruskal(*[stat[stat['Cluster'] == uni][metric] for uni in order]).pvalue:.3e}", ha="left", va="top", transform=axes[i].transAxes)
-
-        annotator = Annotator(axes[i], pairs, data=stat,  y = metric, x = 'Cluster', order=order)
-        annotator.configure(loc='outside')
-        annotator.set_custom_annotations(dunn)
-        annotator.annotate()
-        # rotate axis labels by 45 degrees
+        # Kruskal-Wallis p-value
+        kw_p = kruskal(*[stat[stat['Cluster'] == u][metric] for u in order]).pvalue
+        axes[i].text(0.02, 0.99, f"Kruskal-Wallis p = {kw_p:.3e}", ha="left", va="top", transform=axes[i].transAxes)
         
-        axes[i].get_legend().remove()
-        axes[i].set_xticklabels(axes[i].get_xticklabels(), rotation=45)
+        # Shannon y-axis scaling
+        if metric == 'Shannon index':
+            axes[i].set_ylim(min(stat[metric])-0.1, 1)
 
+        # Annotator outside the plot
+        annotator = Annotator(axes[i], pairs, data=stat, y=metric, x='Cluster', order=order)
+        annotator.configure(loc='outside', fontsize=8)
+        annotator.set_custom_annotations(dunn_annot)
+        annotator.annotate()
+
+
+        # Rotate x-axis labels and reduce font size
+        axes[i].set_xticklabels(axes[i].get_xticklabels(), rotation=45, ha='right', fontsize=8)
+
+    plt.tight_layout()
     fig.savefig(res_dir + 'alpha_diversity_microbiome.png', dpi=600, bbox_inches='tight')
     plt.show()

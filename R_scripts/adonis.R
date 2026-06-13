@@ -236,4 +236,4 @@ p <- grid.arrange(xdensity, blankPlot, scat, ydensity,
              ncol=2, nrow=2, widths=c(4, 1.4), heights=c(1.4, 4))
 
 ggsave(paste0(res_path,"PCoA_density.png"),p, scale = 1, width = 20, height = 12)
-
+p
