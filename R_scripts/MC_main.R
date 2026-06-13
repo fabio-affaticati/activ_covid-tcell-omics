@@ -9,8 +9,25 @@ library(pheatmap)
 library(ggplot2)
 library(ggpubr)
 
-source("/Users/fabioaffaticati/Desktop/Desktop\ -\ Fabio’s\ MacBook\ Pro/Work/activ_covid-tcell-omics/R_scripts/cytometry_metafeatures_functions.R")
-setwd("/Users/fabioaffaticati/Desktop/Desktop - Fabio’s MacBook Pro/Work/activ_covid-tcell-omics")
+script_path_from_args <- function() {
+  file_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+  if (length(file_arg) > 0) {
+    return(normalizePath(sub("^--file=", "", file_arg[[1]]), mustWork = FALSE))
+  }
+  if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
+    active_path <- rstudioapi::getActiveDocumentContext()$path
+    if (!is.null(active_path) && nzchar(active_path)) {
+      return(normalizePath(active_path, mustWork = FALSE))
+    }
+  }
+  NA_character_
+}
+
+script_path <- script_path_from_args()
+script_dir <- if (!is.na(script_path)) dirname(script_path) else getwd()
+repo_root <- if (basename(script_dir) == "R_scripts") dirname(script_dir) else script_dir
+setwd(repo_root)
+source(file.path(repo_root, "R_scripts", "cytometry_metafeatures_functions.R"))
 
 set.seed(42)
 
@@ -134,8 +151,8 @@ row_annotation <- data.frame(
 )
 rownames(row_annotation) <- sample_meta_matrix$sample_time
 
-# Define colors for Enterotype and Timepoint
-timepoint_colors <- c(T1 = "#66c2a5", T2 = "#fc8d62")  # example: green/orange
+# Baseline/follow-up annotations use fixed colors across CD4 and CD8 plots.
+timepoint_colors <- c(T1 = "#66c2a5", T2 = "#fc8d62")
 ann_colors <- list(
   Enterotype = cluster_colors,
   Timepoint  = timepoint_colors
@@ -191,8 +208,8 @@ row_annotation <- data.frame(
 )
 rownames(row_annotation) <- sample_meta_matrix$sample_time
 
-# Define colors for Enterotype and Timepoint
-timepoint_colors <- c(T1 = "#66c2a5", T2 = "#fc8d62")  # example: green/orange
+# Baseline/follow-up annotations use fixed colors across CD4 and CD8 plots.
+timepoint_colors <- c(T1 = "#66c2a5", T2 = "#fc8d62")
 ann_colors <- list(
   Enterotype = cluster_colors,
   Timepoint  = timepoint_colors

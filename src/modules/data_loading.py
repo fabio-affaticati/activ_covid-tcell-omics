@@ -12,6 +12,9 @@ def metadata_import(meta_dir):
     """
     Import and process metadata view.
 
+    Clinical metadata are used to characterize clusters, not to build patient
+    similarity matrices.
+
     Parameters
     ----------
     meta_dir : str
@@ -123,6 +126,7 @@ def tcrseq_loading(tcr_dir):
 
         samplefiles = [f for f in os.listdir(tcr_dir+"/"+run) if "_clones.txt" in f]
 
+        # MiXCR clone filenames encode subject, sorted T cell compartment, and replicate in fixed positions.
         re_pat = re.compile(r'^(\d+)\w_(\w+)_(CD\d)_\w+\.txt')
         parsed_samplefiles = [ (m.group(1),m.group(2),m.group(3),m.group(0)) for m in (re_pat.search(file) for file in samplefiles) if m ]
 
@@ -145,7 +149,7 @@ def tcrseq_loading(tcr_dir):
                 tcr_raw.append(readdata.raw)
     
     tcr_raw = pd.concat(tcr_raw, ignore_index=True)  
-    # calculate freq as freq / sum of freq per sample
+    # Six technical replicates were pooled upstream, so clone fractions are scaled back before grouping.
     tcr_raw['freq']/=6
     tcr_raw = tcr_raw.groupby(['tcrseq', 'sample'], as_index=False).agg({'count': 'sum', 'freq': 'sum', 'cdr3': 'first', 'vgene':'first', 'jgene': 'first', 'type': 'first'})
     tcr_raw['sample'] = tcr_raw['sample'].str.replace('_', ' ')
@@ -195,6 +199,7 @@ def import_all_cytof(cytof_dir):
     #cytof = pd.read_csv(cytof_dir + 'FlowSOM/freq_percent_allcells.csv', sep = ',', index_col = 0)
     cytof = pd.read_csv(cytof_dir + 'FlowSOM/freq_percent_allcells_allmarkers_agg10m_v2.csv', sep = ',', index_col = 0)
     
+    # Drop manually flagged FlowSOM files before harmonizing donor IDs.
     cytof = cytof[cytof.Name != 'FlowSOM_c18_COVID-19 STUDY CyTOF FIXED 221121 HKM_CO161.fcs']
     cytof = cytof[cytof.Name != 'FlowSOM_c09_COVID-19 STUDY CyTOF FIXED 281021 HKM_CO203.fcs']
     cytof = cytof[cytof.Name != 'FlowSOM_c20_COVID-19 STUDY CyTOF FIXED 2 41121 HKM_H40d365.fcs']
@@ -209,7 +214,7 @@ def import_all_cytof(cytof_dir):
     cytof['Donor'].replace(replacements, regex=True, inplace=True)
 
 
-    # Renomae the metaclusters with the corresponding cell types
+    # Map FlowSOM metacluster numbers to the curated cell-type labels used downstream.
     cytof.rename(columns={
                    'Metacluster 1': 'Sen_CD8+Temra',
                    'Metacluster 2': 'Sen_CD4+Tem',
@@ -359,7 +364,7 @@ def cleanup_rna(rna):
     transcript counts with DESeq2 normalisation implementation.
     """
     
-# prepare name of columns
+    # Normalize sample column names before grouping lanes/replicates from the same donor.
     rna.drop(rna.columns[rna.columns.str.startswith('Unnamed')], axis = 1, inplace=True)
     rna.columns = [col.split('/tmp_files/')[-1] for col in rna.columns]
     rna.columns = rna.columns.str.rstrip('.sam')
@@ -384,12 +389,8 @@ def cleanup_rna(rna):
     print(f"Number of patients: {len(results.columns)-1}")
     
 
-    # placeholder column that will be used when normalising gene count with DESeq2.
-    # DESeq2 asks in input the phenotypes for the samples to perform DE analysis but we are
-    # only interested in the normalisation for the moment.
+    # Placeholder design used only to obtain DESeq2 size-factor normalized counts.
     design = ['place'] * (len(results.columns)-1)
-    # save the list of the patients/samples for DESeq2
     colnames = results.columns[1:]
 
     return results, pd.DataFrame({'place' : design, 'colnames' : colnames })
-    

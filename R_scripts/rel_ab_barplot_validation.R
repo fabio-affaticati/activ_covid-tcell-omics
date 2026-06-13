@@ -2,6 +2,25 @@
 
 res_path <- "results/R_scripts_plots/"
 
+script_path_from_args <- function() {
+  file_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+  if (length(file_arg) > 0) {
+    return(normalizePath(sub("^--file=", "", file_arg[[1]]), mustWork = FALSE))
+  }
+  if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
+    active_path <- rstudioapi::getActiveDocumentContext()$path
+    if (!is.null(active_path) && nzchar(active_path)) {
+      return(normalizePath(active_path, mustWork = FALSE))
+    }
+  }
+  NA_character_
+}
+
+script_path <- script_path_from_args()
+script_dir <- if (!is.na(script_path)) dirname(script_path) else getwd()
+repo_root <- if (basename(script_dir) == "R_scripts") dirname(script_dir) else script_dir
+setwd(repo_root)
+
 # Check if the directory exists; if not, create it
 if (!file.exists(res_path)) {
   dir.create(res_path, recursive = TRUE)
@@ -9,8 +28,6 @@ if (!file.exists(res_path)) {
 } else {
   cat("Directory already exists:", res_path, "\n")
 }
-
-setwd("/Users/fabioaffaticati/Desktop/Desktop\ -\ Fabio’s\ MacBook\ Pro/Work/activ_covid-tcell-omics")
 
 library(tidyverse)
 library(RColorBrewer)
@@ -748,30 +765,29 @@ write.csv(pcoa_points2, "metadata_for_entropy.csv")
 
 
 
-# 1️⃣ Keep only numeric taxa columns
+# Keep only numeric taxa columns
 Tab_num <- Tab[, sapply(Tab, is.numeric)]
 
-# 2️⃣ Calculate Shannon entropy
+# Calculate Shannon entropy
 shannon <- diversity(t(Tab_num), index = "shannon")
 
-# 3️⃣ Number of taxa present per sample
+# Count taxa present per sample
 S <- specnumber(t(Tab_num))
 
-# 4️⃣ Normalized Shannon entropy (0–1)
+# Normalize Shannon entropy to the 0-1 range
 normalized_shannon <- shannon / log(S)
 
-# 5️⃣ Combine into dataframe
+# Combine diversity values with sample metadata
 normalized_shannon_df <- data.frame(
   Sample = rownames(t(Tab_num)),
   Normalized_Shannon = normalized_shannon,
   UnnormalizedShannon = shannon
 )
 
-# 6️⃣ Add Cluster info
+# Add cluster labels
 normalized_shannon_df$Cluster <- pcoa_points2$Cluster
 
-# 7️⃣ (Optional) If you later have more diversity metrics, pivot them to long format
-# For now, we only have one metric — so we’ll keep it simple
+# This block currently plots one diversity metric.
 div_long <- normalized_shannon_df %>%
   pivot_longer(
     cols = c(Normalized_Shannon), 
@@ -779,7 +795,6 @@ div_long <- normalized_shannon_df %>%
     values_to = "Value"
   )
 
-# 8️⃣ Plot
 # Ensure Cluster is a factor with the correct order
 div_long$Cluster <- factor(
   div_long$Cluster,
@@ -835,5 +850,3 @@ p <- ggplot(div_long, aes(x = Cluster, y = Value, fill = Cluster)) +
   )
 p
 ggsave(paste0(res_path, "plots_normshannon_snf_spectralclustering_validation.png"), plot = p, width = 6, height = 5, units = "in", dpi = 600)
-
-

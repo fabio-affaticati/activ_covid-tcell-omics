@@ -5,7 +5,7 @@ import re
 
 def parse_imgt(gene):
     #Convert TRB1-1*00(xx) into TRB1-1 as per IMGT format
-    gene = re.sub('\*00.+$','',gene)
+    gene = re.sub(r'\*00.+$','',gene)
     gene = re.sub('TCR','TR',gene)
     gene = re.sub('0(?=[1-9])','',gene)
 

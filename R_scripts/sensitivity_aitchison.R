@@ -192,7 +192,7 @@ cmd_coords   <- as.data.frame(cmd_ait$points[, 1:3])
 colnames(cmd_coords) <- c("PCoA1", "PCoA2", "PCoA3")
 cmd_coords$Cluster   <- metadata$labels
 
-# --- NEW: Scree Plot (Variance Explained) ---
+# --- Scree Plot (Variance Explained) ---
 pos_eig_ait <- cmd_ait$eig[cmd_ait$eig > 0]
 variances   <- pos_eig_ait / sum(pos_eig_ait) * 100
 

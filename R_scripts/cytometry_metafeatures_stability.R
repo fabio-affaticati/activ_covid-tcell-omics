@@ -1,22 +1,39 @@
   res_path_s <- "results/R_scripts_plots/scaled/"
-  
+
+  res_path_notjoined <- "results/R_scripts_plots/notjoined/"
+
+  script_path_from_args <- function() {
+    file_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+    if (length(file_arg) > 0) {
+      return(normalizePath(sub("^--file=", "", file_arg[[1]]), mustWork = FALSE))
+    }
+    if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
+      active_path <- rstudioapi::getActiveDocumentContext()$path
+      if (!is.null(active_path) && nzchar(active_path)) {
+        return(normalizePath(active_path, mustWork = FALSE))
+      }
+    }
+    NA_character_
+  }
+
+  script_path <- script_path_from_args()
+  script_dir <- if (!is.na(script_path)) dirname(script_path) else getwd()
+  repo_root <- if (basename(script_dir) == "R_scripts") dirname(script_dir) else script_dir
+  setwd(repo_root)
+
   # Create directories if they do not exist
   if (!file.exists(res_path_s)) dir.create(res_path_s, recursive = TRUE)
-  
-  res_path_notjoined <- "results/R_scripts_plots/notjoined/"
   if (!file.exists(res_path_notjoined)) dir.create(res_path_notjoined, recursive = TRUE)
-  
-  setwd("/Users/fabioaffaticati/Desktop/Desktop - Fabio’s MacBook Pro/Work/activ_covid-tcell-omics")
-  
+
   library(tidyverse)
   library(pheatmap)
   library(grid)
   library(gridExtra)
   library(circlize)
-  
-  source("/Users/fabioaffaticati/Desktop/Desktop\ -\ Fabio’s\ MacBook\ Pro/Work/activ_covid-tcell-omics/R_scripts/cytometry_metafeatures_functions.R")
-  
-  
+
+  source(file.path(repo_root, "R_scripts", "cytometry_metafeatures_functions.R"))
+
+
   set.seed(42)
   
   ### ----------------------------
@@ -283,7 +300,7 @@
   
   
   ### ============================================================
-  ### NEW SECTION: HEATMAPS FOR NOT-JOINED MATRICES (ONLY SCALED)
+  ### HEATMAPS FOR NOT-JOINED MATRICES (SCALED ONLY)
   ### ============================================================
   
   
@@ -613,6 +630,4 @@
 # certain exhausted/senescent MC (new data only)
 # ------------------------------------------------------------
 
-  
-  
-  
+

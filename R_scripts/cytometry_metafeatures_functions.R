@@ -1,5 +1,5 @@
 ### ----------------------------
-### Helper function to preprocess ANY (CD4/CD8) dataset
+### Helper function to preprocess CD4/CD8 cytometry tables
 ### ----------------------------
 
 process_cytometry <- function(df) {
@@ -48,15 +48,9 @@ process_cytometry <- function(df) {
       sample_id = if_else(str_starts(sample_id, "NICU"), paste0("ERC", sample_id), sample_id)
     )
   
-  # -----------------------------
-  # 🔥 NEW RULES
-  # -----------------------------
-  
+  # Validation samples use different visit labels; keep comparable baseline/follow-up visits.
   df_final <- df_final %>%
-    # drop VZV/TYF samples at T2 or T3
     filter(!(str_detect(sample_id, "VZV|TYF") & Timepoint %in% c("T2", "T3"))) %>%
-    
-    # change T4 → T2 for VZV/TYF
     mutate(
       Timepoint = if_else(
         str_detect(sample_id, "VZV|TYF") & Timepoint == "T4",
@@ -85,7 +79,7 @@ make_matrix <- function(df_tp) {
 
 
 ### ----------------------------
-### Helper: Remove entire samples if ANY row has percentage > 50
+### Helper: remove samples with one metacluster above 50 percent
 ### ----------------------------
 
 remove_samples_percentage <- function(df_tp) {
@@ -101,33 +95,25 @@ remove_samples_percentage <- function(df_tp) {
 
 
 ### ----------------------------
-### Helper: Add missing metacluster rows
+### Helper: complete the expected FlowSOM metacluster grid
 ### ----------------------------
 
 library(dplyr)
 library(tidyr)
 
 enforce_55_metaclusters <- function(df, total_mc = 55) {
-  # ensure Metacluster is integer (or numeric)
+  # Metacluster IDs must be numeric before completing the expected range.
   df <- df %>% mutate(Metacluster = as.integer(Metacluster))
   
-  # columns that must not be auto-filled with cluster numbers
-  # (we'll treat percentage specially and fill other metadata with the group's first non-NA)
+  # Preserve per-sample metadata while adding zero rows for absent FlowSOM metaclusters.
   meta_cols <- setdiff(names(df), c("sample_id", "Timepoint", "Metacluster", "percentage"))
   
   df_fixed <- df %>%
-    # group per sample_id x Timepoint
     group_by(sample_id, Timepoint) %>%
-    # ensure a row for every Metacluster 1:total_mc
     complete(Metacluster = seq_len(total_mc)) %>%
-    # percentage: replace NA (newly created rows) with 0
     mutate(percentage = replace_na(percentage, 0)) %>%
-    # for all other metadata columns, fill missing values with the first non-NA value in the group
-    # if a whole group had NA for a meta column (unlikely), it stays NA
     mutate(across(all_of(meta_cols), ~ {
-      # find first non-NA in this group
       first_val <- { tmp <- .; tmp_non_na <- tmp[!is.na(tmp)]; if (length(tmp_non_na)) tmp_non_na[1] else NA }
-      # replace NAs with that first_val
       replace_na(., first_val)
     })) %>%
     ungroup() %>%
@@ -135,4 +121,3 @@ enforce_55_metaclusters <- function(df, total_mc = 55) {
   
   return(df_fixed)
 }
-

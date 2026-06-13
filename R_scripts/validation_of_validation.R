@@ -9,8 +9,25 @@ library(pheatmap)
 library(ggplot2)
 library(ggpubr)
 
-source("/Users/fabioaffaticati/Desktop/Desktop\ -\ Fabio’s\ MacBook\ Pro/Work/activ_covid-tcell-omics/R_scripts/cytometry_metafeatures_functions.R")
-setwd("/Users/fabioaffaticati/Desktop/Desktop - Fabio’s MacBook Pro/Work/activ_covid-tcell-omics")
+script_path_from_args <- function() {
+  file_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+  if (length(file_arg) > 0) {
+    return(normalizePath(sub("^--file=", "", file_arg[[1]]), mustWork = FALSE))
+  }
+  if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
+    active_path <- rstudioapi::getActiveDocumentContext()$path
+    if (!is.null(active_path) && nzchar(active_path)) {
+      return(normalizePath(active_path, mustWork = FALSE))
+    }
+  }
+  NA_character_
+}
+
+script_path <- script_path_from_args()
+script_dir <- if (!is.na(script_path)) dirname(script_path) else getwd()
+repo_root <- if (basename(script_dir) == "R_scripts") dirname(script_dir) else script_dir
+setwd(repo_root)
+source(file.path(repo_root, "R_scripts", "cytometry_metafeatures_functions.R"))
 
 set.seed(42)
 
@@ -97,9 +114,9 @@ cd4_sum <- cd4_clean_annot %>%
   summarise(total_percentage = sum(percentage, na.rm = TRUE), .groups = "drop")
 
 
-oldCytof <- read.csv("/Users/fabioaffaticati/Desktop/Desktop\ -\ Fabio’s\ MacBook\ Pro/Work/activ_covid-tcell-omics/data/processed_data/Cytof_meta.csv", sep='\t', row.names = 1, check.names = FALSE)
+oldCytof <- read.csv("data/processed_data/Cytof_meta.csv", sep='\t', row.names = 1, check.names = FALSE)
 
-oldEnterotypes <- read.csv("/Users/fabioaffaticati/Desktop/Desktop\ -\ Fabio’s\ MacBook\ Pro/Work/activ_covid-tcell-omics/data/processed_data/chord_plot_data/Micro_clusters.csv", sep='\t', row.names = 1, check.names = FALSE)
+oldEnterotypes <- read.csv("data/processed_data/chord_plot_data/Micro_clusters.csv", sep='\t', row.names = 1, check.names = FALSE)
 
 oldEnterotypes <- oldEnterotypes %>%
   rename(sample_id = Donor) %>%
@@ -176,6 +193,5 @@ for (p in unique(merged_df$phenotype_mapped)) {
     height = 6,
     dpi = 300
   )
-  
+
 }
-  

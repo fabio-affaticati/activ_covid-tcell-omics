@@ -123,7 +123,7 @@ def draw_clustermap(clus_labels, affinity, res_dir, scaling = 'standard', shape 
     lut = dict(zip(sorted(printable_labels.unique()), sns.color_palette("colorblind")))
     row_colors = printable_labels.map(lut).to_numpy()
 
-    # choose if you want to scale in someway the affinities
+    # Optional visual scaling of affinities before plotting.
     if scaling == 'standard':
         data = StandardScaler().fit_transform(data)
     elif scaling == 'minmax':
@@ -432,6 +432,7 @@ def micro_analysis(data, clus_labels, micro_taxa, res_dir):
                 fig.data[i]['showlegend'] = False
                 fig.data[i]['marker_symbol'] = 'circle-x'
             except IndexError:
+                # The low-effect-size layer can be absent for small result sets.
                 pass
 
         fig.update_layout(font=dict(

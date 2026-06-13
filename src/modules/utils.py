@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import re
 import os
+import tempfile
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -32,6 +33,19 @@ from src.modules.plotting import significant_reg, convert_pvalue_to_asterisks
 
 
 random_state = 42
+
+
+def _write_gsea_cls_file(clusters, cluster):
+    """Write a temporary one-vs-rest CLS file for GSEApy."""
+    cls_file = tempfile.NamedTemporaryFile(mode='w', suffix='.cls', delete=False)
+    try:
+        line = f"{len(list(clusters['Cluster']))} 2 1\n# {cluster.replace(' ','_')} Cluster_Else\n"
+        cls_file.write(line)
+        cls_file.write(' '.join(list(clusters['Cluster'])) + '\n')
+    finally:
+        cls_file.close()
+
+    return cls_file.name
 
 
 def eigentaxa_encoding(micro_fused_rel, eigentaxa):
@@ -80,8 +94,6 @@ def testing_metrics(data, mets, dimensions, dataset_name):
     for n_clusters in [2,3,4,5,6,7,8]:
 
         for met in mets:
-            #print(f'Metric {met}')
-
             for dimension in dimensions:
 
                 affinity = snf_mod(data, [met], dimension)
@@ -91,7 +103,7 @@ def testing_metrics(data, mets, dimensions, dataset_name):
                 
                 eigenvalues = np.sort(np.linalg.eigvals(laplacian))
                 
-                clus_labels = utils.spectral_clustering_custom(affinity, n_clusters)
+                clus_labels = spectral_clustering_custom(affinity, n_clusters)
                 silhouette = snf.metrics.silhouette_score(affinity, clus_labels)
                 silhouettes = silhouettes.append({'metric': met,'dimension':dimension,'n_clusters':n_clusters,'silhouette':silhouette, 'dataset':dataset_name},ignore_index = True)
 
@@ -210,7 +222,7 @@ def aggregate_modules(typ, normalized_count, data_dir, dir_path):
     
     normalized_count['genename'] = [x.upper() for x in normalized_count['genename']]
     renamed = normalized_count.replace({"genename": dict(zip(module_list['Gene'], module_list['Module'] + '.' + module_list['Function']))})
-    modules = [x for x in renamed['genename'].unique() if re.match('M[0-9]{1,3}\.[0-9]{1,3}', x)]
+    modules = [x for x in renamed['genename'].unique() if re.match(r'M[0-9]{1,3}\.[0-9]{1,3}', x)]
     
     # Keep only data present in the modules 
     renamed = renamed.loc[renamed['genename'].isin(modules)]
@@ -223,6 +235,7 @@ def aggregate_modules(typ, normalized_count, data_dir, dir_path):
 
         pose = pd.DataFrame()
         for group_name, df_group in agg:
+            # BloodGen3 BTMs are summarized by the first PC across member genes.
             df_group = pca.fit_transform(scaler.fit_transform(df_group.drop(columns='genename').to_numpy().T)).T
             pose[group_name] = df_group.flatten().tolist()
 
@@ -350,7 +363,7 @@ def add_to_network(clusters, parameters, pvalues, origin, network):
 
 
 
-# not used after development
+# Retained for exploratory multi-library GSEA comparisons.
 def gsea_analysis_multi(counts, clus_labels, res_dir, path_sets):
 
         for cluster in sorted(clus_labels.unique()):
@@ -358,10 +371,9 @@ def gsea_analysis_multi(counts, clus_labels, res_dir, path_sets):
                 results_pos = []
                 results_neg = []
 
-                #print(f'Cluster {cluster}')
                 rna_data = counts.copy()
 
-                ### done to make have 'genename' as first column, otherwise GSEA will not run properly
+                # GSEA expects the gene-name column to be first in the expression table.
                 rna_data.set_index('genename', inplace =True)
                 rna_data.reset_index(inplace = True)
                 
@@ -371,40 +383,36 @@ def gsea_analysis_multi(counts, clus_labels, res_dir, path_sets):
                 clusters['Cluster'] = [clus if clus == cluster else 'Cluster Else' for clus in clusters['Cluster']]
                 clusters['Cluster'] = clusters['Cluster'].str.replace(' ', '_')
 
-                with open('temp.cls', 'w') as cl:
-                        line = f"{len(list(clusters['Cluster']))} 2 1\n# {cluster.replace(' ','_')} Cluster_Else\n" 
-                        cl.write(line) 
-                        cl.write(' '.join(list(clusters['Cluster'])) + '\n')
+                # Temporary CLS file encodes the one-vs-rest cluster comparison for GSEApy.
+                cls_file = _write_gsea_cls_file(clusters, cluster)
+                try:
+                        for sets in path_sets:
+                                gs_res = gsea(data=rna_data,
+                                        gene_sets=sets,
+                                        cls = cls_file,
+                                        permutation_type='phenotype',permutation_num=100,
+                                        outdir=None,
+                                        method='signal_to_noise',
+                                        verbose = False,
+                                        threads = 4, seed = random_state)
 
+                                gsea_results_pos = gs_res.res2d[(gs_res.res2d['NES'] > 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[False,True]).iloc[:10,:]
 
-                for sets in path_sets:
-                        gs_res = gsea(data=rna_data,
-                                gene_sets=sets,
-                                cls = 'temp.cls',
-                                permutation_type='phenotype',permutation_num=100,
-                                outdir=None,
-                                method='signal_to_noise',
-                                verbose = False,
-                                threads = 4, seed = random_state)
-                        
-                        gsea_results_pos = gs_res.res2d[(gs_res.res2d['NES'] > 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[False,True]).iloc[:10,:]
-                        
-                        gsea_results_pos['Pathway'] = sets
-                        gsea_results_pos['cluster'] = cluster
-                        
-                        gsea_results_pos['Term']=[g.split(' (GO')[0] for g in gsea_results_pos['Term']]
-                        results_pos.append(gsea_results_pos)
+                                gsea_results_pos['Pathway'] = sets
+                                gsea_results_pos['cluster'] = cluster
 
-                        gsea_results_neg = gs_res.res2d[(gs_res.res2d['NES'] < 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[True,True]).iloc[:10,:]
-                        
-                        gsea_results_neg['Term']=[g.split(' (GO')[0] for g in gsea_results_neg['Term']]
-                        gsea_results_neg['Pathway'] = sets
-                        gsea_results_neg['cluster'] = cluster
-                        results_neg.append(gsea_results_neg)
+                                gsea_results_pos['Term']=[g.split(' (GO')[0] for g in gsea_results_pos['Term']]
+                                results_pos.append(gsea_results_pos)
 
+                                gsea_results_neg = gs_res.res2d[(gs_res.res2d['NES'] < 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[True,True]).iloc[:10,:]
 
-                if os.path.isfile('temp.cls'):
-                        os.remove('temp.cls')
+                                gsea_results_neg['Term']=[g.split(' (GO')[0] for g in gsea_results_neg['Term']]
+                                gsea_results_neg['Pathway'] = sets
+                                gsea_results_neg['cluster'] = cluster
+                                results_neg.append(gsea_results_neg)
+                finally:
+                        if os.path.isfile(cls_file):
+                                os.remove(cls_file)
           
                 results_pos = pd.concat(results_pos)
                 results_neg = pd.concat(results_neg)
@@ -433,10 +441,9 @@ def gsea_analysis(counts, clus_labels, res_dir, path_sets):
 
         for cluster in sorted(set(clus_labels)):
 
-                #print(f'Cluster {cluster}')
                 rna_data = counts.copy()
 
-                ### done to make have 'genename' as first column, otherwise GSEA will not run properly
+                # GSEA expects the gene-name column to be first in the expression table.
                 rna_data.set_index('genename', inplace =True)
                 rna_data.reset_index(inplace = True)
                 
@@ -446,41 +453,37 @@ def gsea_analysis(counts, clus_labels, res_dir, path_sets):
                 clusters['Cluster'] = [clus if clus == cluster else 'Cluster Else' for clus in clusters['Cluster']]
                 clusters['Cluster'] = clusters['Cluster'].str.replace(' ', '_')
 
-                with open('temp.cls', 'w') as cl:
-                        line = f"{len(list(clusters['Cluster']))} 2 1\n# {cluster.replace(' ','_')} Cluster_Else\n" 
-                        cl.write(line) 
-                        cl.write(' '.join(list(clusters['Cluster'])) + '\n')
+                # Temporary CLS file encodes the one-vs-rest cluster comparison for GSEApy.
+                cls_file = _write_gsea_cls_file(clusters, cluster)
+                try:
+                        for sets in path_sets:
+                                gs_res = gsea(data=rna_data,
+                                        gene_sets=sets,
+                                        cls = cls_file,
+                                        permutation_type='phenotype',
+                                        permutation_num=100,
+                                        outdir=None,
+                                        method='signal_to_noise',
+                                        verbose = False,
+                                        threads =4 , seed = random_state)
 
+                                gsea_results_pos = gs_res.res2d[(gs_res.res2d['NES'] > 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[False,True]).iloc[:10,:]
 
-                for sets in path_sets:
-                        gs_res = gsea(data=rna_data,
-                                gene_sets=sets,
-                                cls = 'temp.cls',
-                                permutation_type='phenotype', 
-                                permutation_num=100,
-                                outdir=None,
-                                method='signal_to_noise',
-                                verbose = False,
-                                threads =4 , seed = random_state)
-                        
-                        gsea_results_pos = gs_res.res2d[(gs_res.res2d['NES'] > 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[False,True]).iloc[:10,:]
-                        
-                        gsea_results_pos['Pathway'] = sets
-                        gsea_results_pos['cluster'] = cluster
+                                gsea_results_pos['Pathway'] = sets
+                                gsea_results_pos['cluster'] = cluster
 
-                        gsea_results_pos['Term']=[g.split(' (GO')[0] for g in gsea_results_pos['Term']]
-                        results_pos.append(gsea_results_pos)
+                                gsea_results_pos['Term']=[g.split(' (GO')[0] for g in gsea_results_pos['Term']]
+                                results_pos.append(gsea_results_pos)
 
-                        gsea_results_neg = gs_res.res2d[(gs_res.res2d['NES'] < 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[True,True]).iloc[:10,:]
-                        
-                        gsea_results_neg['Term']=[g.split(' (GO')[0] for g in gsea_results_neg['Term']]
-                        gsea_results_neg['Pathway'] = sets
-                        gsea_results_neg['cluster'] = cluster
-                        results_neg.append(gsea_results_neg)
-                        
+                                gsea_results_neg = gs_res.res2d[(gs_res.res2d['NES'] < 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[True,True]).iloc[:10,:]
 
-                if os.path.isfile('temp.cls'):
-                        os.remove('temp.cls')
+                                gsea_results_neg['Term']=[g.split(' (GO')[0] for g in gsea_results_neg['Term']]
+                                gsea_results_neg['Pathway'] = sets
+                                gsea_results_neg['cluster'] = cluster
+                                results_neg.append(gsea_results_neg)
+                finally:
+                        if os.path.isfile(cls_file):
+                                os.remove(cls_file)
           
 
                 try:
@@ -526,6 +529,7 @@ def cytof_clusters_analysis(cytof, clus_labels, res_dir):
     try:
         setup.drop(columns = 'Donor', inplace = True)
     except:
+        # Some call sites pass CyTOF matrices that already exclude donor labels.
         print('No need to drop Donor')
 
     for cluster in sorted(clus_labels.unique()):
@@ -598,12 +602,9 @@ def gsea_analysis_bacteria(counts, clus_labels, bubble_dir, res_dir, path_sets):
         
         for cluster in sorted(clus_labels.unique()):
                 
-                if os.path.isfile('temp.cls'):
-                        os.remove('temp.cls')
-                        
                 print(f'Cluster {cluster}')
                 micro_data = counts.copy()
-                ### done to make have 'taxaname' as first column, otherwise GSEA will not run properly
+                # Family-level microbiome enrichment reuses GSEA with taxa as gene-set analogs.
                 micro_data.set_index('taxaname', inplace =True)
                 micro_data.reset_index(inplace = True)
                 
@@ -613,37 +614,35 @@ def gsea_analysis_bacteria(counts, clus_labels, bubble_dir, res_dir, path_sets):
                 clusters['Cluster'] = [clus if clus == cluster else 'Cluster_Else' for clus in clusters['Cluster']]
                 clusters['Cluster'] = clusters['Cluster'].str.replace(' ', '_')
                 
-                with open('temp.cls', 'w') as cl:
-                        line = f"{len(list(clusters['Cluster']))} 2 1\n# {cluster.replace(' ','_')} Cluster_Else\n" 
-                        cl.write(line) 
-                        cl.write(' '.join(list(clusters['Cluster'])) + '\n')
-                        
-                for sets in path_sets:
-                        gs_res = gsea(data=micro_data,
-                                gene_sets=sets,
-                                cls = 'temp.cls',
-                                permutation_type='phenotype', 
-                                permutation_num=1000,
-                                outdir=None,
-                                method='signal_to_noise',
-                                verbose = False,
-                                threads =4 , seed = random_state)
-                        
-                        gsea_results_pos = gs_res.res2d[(gs_res.res2d['NES'] > 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[False,True]).iloc[:10,:]
-                        
-                        gsea_results_pos['cluster'] = cluster
+                # Temporary CLS file encodes the one-vs-rest cluster comparison for GSEApy.
+                cls_file = _write_gsea_cls_file(clusters, cluster)
+                try:
+                        for sets in path_sets:
+                                gs_res = gsea(data=micro_data,
+                                        gene_sets=sets,
+                                        cls = cls_file,
+                                        permutation_type='phenotype',
+                                        permutation_num=1000,
+                                        outdir=None,
+                                        method='signal_to_noise',
+                                        verbose = False,
+                                        threads =4 , seed = random_state)
 
-                        results_pos.append(gsea_results_pos)
+                                gsea_results_pos = gs_res.res2d[(gs_res.res2d['NES'] > 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[False,True]).iloc[:10,:]
 
-                        gsea_results_neg = gs_res.res2d[(gs_res.res2d['NES'] < 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[True,True]).iloc[:10,:]
-                        
-                        gsea_results_neg['cluster'] = cluster
-                        
-                        results_neg.append(gsea_results_neg)
-                        pd.DataFrame(gs_res.res2d).to_csv(f'{bubble_dir}bubbleplot_{cluster}.csv', sep='\t')
+                                gsea_results_pos['cluster'] = cluster
 
-                if os.path.isfile('temp.cls'):
-                        os.remove('temp.cls')
+                                results_pos.append(gsea_results_pos)
+
+                                gsea_results_neg = gs_res.res2d[(gs_res.res2d['NES'] < 0) & (gs_res.res2d['FDR q-val'] < 0.25)].reset_index(drop=True).sort_values(by=['NES', 'FDR q-val'], ascending=[True,True]).iloc[:10,:]
+
+                                gsea_results_neg['cluster'] = cluster
+
+                                results_neg.append(gsea_results_neg)
+                                pd.DataFrame(gs_res.res2d).to_csv(f'{bubble_dir}bubbleplot_{cluster}.csv', sep='\t')
+                finally:
+                        if os.path.isfile(cls_file):
+                                os.remove(cls_file)
           
 
                 try:
@@ -755,10 +754,7 @@ def stability_analysis(data, individuals, metric, dim , n_clusters, n_iterations
             one_hot = one_hot.T.astype(int)
             one_hot = one_hot.T.dot(one_hot)
 
-
-            ### Could concat them all at the end to speed up execution
             cooccurrence = pd.concat([cooccurrence, one_hot.reset_index()]).groupby('Donor',as_index=False).sum()
-            #print(one_hot.reset_index())
 
 
     cooccurrence.set_index(keys = ['Donor'], inplace = True)
